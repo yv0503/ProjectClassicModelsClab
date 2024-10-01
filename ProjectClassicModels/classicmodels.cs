@@ -76,9 +76,9 @@ namespace ProjectClassicModels
                     myConn.Open();
                     if (myConn.State == ConnectionState.Open)
                     {
-                        string query = "SELECT customerNumber AS 'Cust Number', customerName AS 'Customer Name', " +
-                            "country AS Country, contactLastName, contactFirstName, Phone, addressLine1, " +
-                            "addressLine2 FROM customers";
+                        string query = "SELECT customerNumber AS 'Customer Number', customerName AS 'Customer Name', " +
+                            "country AS Country, state, contactLastName, contactFirstName, Phone, addressLine1, " +
+                            "addressLine2, postalCode, salesRepEmployeeNumber ,creditLimit FROM customers";
 
                         MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
 
@@ -107,7 +107,7 @@ namespace ProjectClassicModels
             //EnabledNavButtons("1110");
         }
 
-        public void CustomerCountry(ComboBox cb)
+        public void BindCustomerCountry(ComboBox cb)
         {
             try
             {
@@ -139,7 +139,7 @@ namespace ProjectClassicModels
             }
         }
 
-        public void CustomerState(ComboBox cb)
+        public void BindCustomerState(ComboBox cb)
         {
             try
             {
@@ -171,7 +171,7 @@ namespace ProjectClassicModels
             }
         }
 
-        public void CustomerCity(ComboBox cb)
+        public void BindCustomerCity(ComboBox cb)
         {
             try
             {
@@ -200,6 +200,65 @@ namespace ProjectClassicModels
             catch (Exception e1)
             {
                 MessageBox.Show("Error message is: " + e1.Message);
+            }
+        }
+
+        public void SelectedCity(ComboBox cb, string selectedCity) {
+            for (int index = 0; index < cb.Items.Count; index++)
+            { 
+                DataRowView rowView = cb.Items[index] as DataRowView;
+
+                if (rowView != null)
+                {
+                    string city = rowView["City"].ToString();
+
+                    if (city.Equals(selectedCity, StringComparison.OrdinalIgnoreCase))
+                    {
+                        cb.SelectedIndex = index;
+                        break;
+                    }
+                }
+
+            }
+        }
+
+        public void SelectedState(ComboBox cb, string selectedState)
+        {
+            for (int index = 0; index < cb.Items.Count; index++)
+            {
+                DataRowView rowView = cb.Items[index] as DataRowView;
+
+                if (rowView != null)
+                {
+                    string state = rowView["State"].ToString();
+
+                    if (state.Equals(selectedState, StringComparison.OrdinalIgnoreCase))
+                    {
+                        cb.SelectedIndex = index;
+                        break;
+                    }
+                }
+
+            }
+        }
+
+        public void SelectedCountry(ComboBox cb, string selectedCountry)
+        {
+            for (int index = 0; index < cb.Items.Count; index++)
+            {
+                DataRowView rowView = cb.Items[index] as DataRowView;
+
+                if (rowView != null)
+                {
+                    string country = rowView["Country"].ToString();
+
+                    if (country.Equals(selectedCountry, StringComparison.OrdinalIgnoreCase))
+                    {
+                        cb.SelectedIndex = index;
+                        break;
+                    }
+                }
+
             }
         }
 
