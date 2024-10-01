@@ -79,8 +79,6 @@ namespace ProjectClassicModels
             BindCustomers(e.RowIndex);
         }
 
-
-
         private void customerTab_SelectedIndexChanged(object sender, EventArgs e)
         {
             int monitorWidth = Screen.PrimaryScreen.Bounds.Width;
