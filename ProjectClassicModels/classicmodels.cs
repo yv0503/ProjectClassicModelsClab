@@ -272,7 +272,7 @@ namespace ProjectClassicModels
                 {
                     string PostalCode = rowView["postalCode"].ToString();
 
-                    if (PostalCode.Equals(SelectedPostalCode, StringComparison.OrdinalIgnoreCase))
+                    if (PostalCode.Equals(selectedPostalCode, StringComparison.OrdinalIgnoreCase))
                     {
                         cb.SelectedIndex = index;
                         break;
