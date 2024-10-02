@@ -262,5 +262,25 @@ namespace ProjectClassicModels
             }
         }
 
+        public void SelectedPostalCode(ComboBox cb, string selectedCountry)
+        {
+            for (int index = 0; index < cb.Items.Count; index++)
+            {
+                DataRowView rowView = cb.Items[index] as DataRowView;
+
+                if (rowView != null)
+                {
+                    string PostalCode = rowView["postalCode"].ToString();
+
+                    if (PostalCode.Equals(SelectedPostalCode, StringComparison.OrdinalIgnoreCase))
+                    {
+                        cb.SelectedIndex = index;
+                        break;
+                    }
+                }
+
+            }
+        }
+
     }
 }
