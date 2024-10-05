@@ -16,9 +16,9 @@ namespace ProjectClassicModels
         private MySqlCommand myCommand = new MySqlCommand();
         private MySqlDataAdapter mydataAdapter = new MySqlDataAdapter();
         private DataTable dt = new DataTable();
-        private MySqlDataReader MySqlDataReader = null;
+        //private MySqlDataReader MySqlDataReader = null;
 
-        private string connstring = @"server=localhost;userid=root;password=123456;database=classicmodels";
+        private string connstring = @"server=localhost;userid=root;password=Cake!070503;database=classicmodels";
 
         public bool Authentication(string username, string password)
         {
@@ -262,25 +262,7 @@ namespace ProjectClassicModels
             }
         }
 
-        public void SelectedPostalCode(ComboBox cb, string selectedCountry)
-        {
-            for (int index = 0; index < cb.Items.Count; index++)
-            {
-                DataRowView rowView = cb.Items[index] as DataRowView;
-
-                if (rowView != null)
-                {
-                    string PostalCode = rowView["postalCode"].ToString();
-
-                    if (PostalCode.Equals(selectedPostalCode, StringComparison.OrdinalIgnoreCase))
-                    {
-                        cb.SelectedIndex = index;
-                        break;
-                    }
-                }
-
-            }
-        }
+       
 
     }
 }

@@ -49,7 +49,7 @@ namespace ProjectClassicModels
 
         private void outBtn_Click(object sender, EventArgs e)
         {
-            
+            this.Close();
         }
     }
 }
