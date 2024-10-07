@@ -167,7 +167,7 @@
             this.materialDivider1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.materialDivider1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialDivider1.BackColor = System.Drawing.Color.DarkGray;
             this.materialDivider1.Depth = 0;
             this.materialDivider1.Location = new System.Drawing.Point(-3, -5);
             this.materialDivider1.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
@@ -175,6 +175,7 @@
             this.materialDivider1.Size = new System.Drawing.Size(287, 230);
             this.materialDivider1.TabIndex = 13;
             this.materialDivider1.Text = "materialDivider1";
+            this.materialDivider1.Click += new System.EventHandler(this.materialDivider1_Click);
             // 
             // frmLogin
             // 

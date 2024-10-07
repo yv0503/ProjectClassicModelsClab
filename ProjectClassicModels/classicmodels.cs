@@ -203,66 +203,41 @@ namespace ProjectClassicModels
             }
         }
 
-        public void SelectedCity(ComboBox cb, string selectedCity) {
-            for (int index = 0; index < cb.Items.Count; index++)
-            { 
-                DataRowView rowView = cb.Items[index] as DataRowView;
 
-                if (rowView != null)
-                {
-                    string city = rowView["City"].ToString();
-
-                    if (city.Equals(selectedCity, StringComparison.OrdinalIgnoreCase))
-                    {
-                        cb.SelectedIndex = index;
-                        break;
-                    }
-                }
-
-            }
-        }
-
-        public void SelectedState(ComboBox cb, string selectedState)
+        public void BindPostalCode(ComboBox cb)
         {
-            for (int index = 0; index < cb.Items.Count; index++)
+            try
             {
-                DataRowView rowView = cb.Items[index] as DataRowView;
+                myConn = new MySqlConnection(connstring);
 
-                if (rowView != null)
+                if (myConn.State != ConnectionState.Open)
                 {
-                    string state = rowView["State"].ToString();
-
-                    if (state.Equals(selectedState, StringComparison.OrdinalIgnoreCase))
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
                     {
-                        cb.SelectedIndex = index;
-                        break;
+                        string query = "SELECT Distinct postalCode AS postalCode FROM customers ORDER BY postalCode ASC";
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
+
+                        DataSet ds = new DataSet();
+
+                        da.Fill(ds, "0");
+                        dt = ds.Tables["0"];
+
+                        cb.DataSource = dt;
+                        cb.DisplayMember = "postalCode";
+                        cb.ValueMember = "postalCode";
                     }
                 }
-
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
             }
         }
 
-        public void SelectedCountry(ComboBox cb, string selectedCountry)
-        {
-            for (int index = 0; index < cb.Items.Count; index++)
-            {
-                DataRowView rowView = cb.Items[index] as DataRowView;
 
-                if (rowView != null)
-                {
-                    string country = rowView["Country"].ToString();
 
-                    if (country.Equals(selectedCountry, StringComparison.OrdinalIgnoreCase))
-                    {
-                        cb.SelectedIndex = index;
-                        break;
-                    }
-                }
-
-            }
-        }
-
-       
 
     }
 }

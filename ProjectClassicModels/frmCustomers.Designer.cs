@@ -34,7 +34,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.credit = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.frstBtn = new System.Windows.Forms.Button();
             this.lstBtn = new System.Windows.Forms.Button();
@@ -64,12 +63,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgCustomers = new System.Windows.Forms.DataGridView();
+            this.salesNo = new System.Windows.Forms.NumericUpDown();
+            this.cnfrmBtn = new System.Windows.Forms.Button();
             this.customerTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.credit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgCustomers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.salesNo)).BeginInit();
             this.SuspendLayout();
             // 
             // customerTab
@@ -88,11 +89,12 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.cnfrmBtn);
             this.tabPage1.Controls.Add(this.txtaddressline2);
             this.tabPage1.Controls.Add(this.label12);
             this.tabPage1.Controls.Add(this.credit);
             this.tabPage1.Controls.Add(this.label11);
-            this.tabPage1.Controls.Add(this.numericUpDown1);
+            this.tabPage1.Controls.Add(this.salesNo);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.frstBtn);
             this.tabPage1.Controls.Add(this.lstBtn);
@@ -130,6 +132,7 @@
             // 
             // txtaddressline2
             // 
+            this.txtaddressline2.Enabled = false;
             this.txtaddressline2.Location = new System.Drawing.Point(589, 48);
             this.txtaddressline2.Name = "txtaddressline2";
             this.txtaddressline2.Size = new System.Drawing.Size(493, 29);
@@ -147,9 +150,15 @@
             // 
             // credit
             // 
+            this.credit.Enabled = false;
             this.credit.Location = new System.Drawing.Point(752, 82);
+            this.credit.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
             this.credit.Name = "credit";
-            this.credit.Size = new System.Drawing.Size(77, 29);
+            this.credit.Size = new System.Drawing.Size(164, 29);
             this.credit.TabIndex = 46;
             // 
             // label11
@@ -161,13 +170,6 @@
             this.label11.TabIndex = 45;
             this.label11.Text = "Credit";
             this.label11.Click += new System.EventHandler(this.label11_Click);
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(589, 82);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(77, 29);
-            this.numericUpDown1.TabIndex = 44;
             // 
             // label7
             // 
@@ -213,9 +215,11 @@
             this.prevBtn.TabIndex = 39;
             this.prevBtn.Text = "Prev";
             this.prevBtn.UseVisualStyleBackColor = true;
+            this.prevBtn.Click += new System.EventHandler(this.prevBtn_Click);
             // 
             // txtaddressline
             // 
+            this.txtaddressline.Enabled = false;
             this.txtaddressline.Location = new System.Drawing.Point(589, 12);
             this.txtaddressline.Name = "txtaddressline";
             this.txtaddressline.Size = new System.Drawing.Size(493, 29);
@@ -249,6 +253,7 @@
             this.dltBtn.TabIndex = 35;
             this.dltBtn.Text = "Delete";
             this.dltBtn.UseVisualStyleBackColor = true;
+            this.dltBtn.Click += new System.EventHandler(this.dltBtn_Click);
             // 
             // edtBtn
             // 
@@ -258,6 +263,7 @@
             this.edtBtn.TabIndex = 34;
             this.edtBtn.Text = "Edit";
             this.edtBtn.UseVisualStyleBackColor = true;
+            this.edtBtn.Click += new System.EventHandler(this.edtBtn_Click);
             // 
             // newBtn
             // 
@@ -271,6 +277,7 @@
             // 
             // cmbpostalcode
             // 
+            this.cmbpostalcode.Enabled = false;
             this.cmbpostalcode.FormattingEnabled = true;
             this.cmbpostalcode.Location = new System.Drawing.Point(184, 269);
             this.cmbpostalcode.Name = "cmbpostalcode";
@@ -279,6 +286,7 @@
             // 
             // cmbcity
             // 
+            this.cmbcity.Enabled = false;
             this.cmbcity.FormattingEnabled = true;
             this.cmbcity.Location = new System.Drawing.Point(186, 231);
             this.cmbcity.Name = "cmbcity";
@@ -287,6 +295,7 @@
             // 
             // cmbstate
             // 
+            this.cmbstate.Enabled = false;
             this.cmbstate.FormattingEnabled = true;
             this.cmbstate.Location = new System.Drawing.Point(186, 193);
             this.cmbstate.Name = "cmbstate";
@@ -296,6 +305,7 @@
             // 
             // cmbcountry
             // 
+            this.cmbcountry.Enabled = false;
             this.cmbcountry.FormattingEnabled = true;
             this.cmbcountry.Location = new System.Drawing.Point(186, 155);
             this.cmbcountry.Name = "cmbcountry";
@@ -307,6 +317,7 @@
             // 
             this.txtcontactNumber.BackColor = System.Drawing.SystemColors.Info;
             this.txtcontactNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtcontactNumber.Enabled = false;
             this.txtcontactNumber.Location = new System.Drawing.Point(186, 120);
             this.txtcontactNumber.Name = "txtcontactNumber";
             this.txtcontactNumber.Size = new System.Drawing.Size(236, 29);
@@ -316,6 +327,7 @@
             // 
             this.txtfirstName.BackColor = System.Drawing.SystemColors.Info;
             this.txtfirstName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtfirstName.Enabled = false;
             this.txtfirstName.Location = new System.Drawing.Point(186, 85);
             this.txtfirstName.Name = "txtfirstName";
             this.txtfirstName.Size = new System.Drawing.Size(236, 29);
@@ -325,6 +337,7 @@
             // 
             this.txtlastName.BackColor = System.Drawing.SystemColors.Info;
             this.txtlastName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtlastName.Enabled = false;
             this.txtlastName.Location = new System.Drawing.Point(186, 46);
             this.txtlastName.Name = "txtlastName";
             this.txtlastName.Size = new System.Drawing.Size(236, 29);
@@ -334,6 +347,7 @@
             // 
             this.txtCustomerNumber.BackColor = System.Drawing.SystemColors.Info;
             this.txtCustomerNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtCustomerNumber.Enabled = false;
             this.txtCustomerNumber.Location = new System.Drawing.Point(186, 10);
             this.txtCustomerNumber.Name = "txtCustomerNumber";
             this.txtCustomerNumber.Size = new System.Drawing.Size(236, 29);
@@ -453,7 +467,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 33);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(719, 299);
+            this.tabPage2.Size = new System.Drawing.Size(1088, 363);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "View Customers";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -467,10 +481,35 @@
             this.dgCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgCustomers.Location = new System.Drawing.Point(7, 7);
             this.dgCustomers.Name = "dgCustomers";
-            this.dgCustomers.Size = new System.Drawing.Size(712, 292);
+            this.dgCustomers.ReadOnly = true;
+            this.dgCustomers.Size = new System.Drawing.Size(1081, 356);
             this.dgCustomers.TabIndex = 1;
             this.dgCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCustomers_CellContentClick);
             this.dgCustomers.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCustomers_CellContentDoubleClick);
+            // 
+            // salesNo
+            // 
+            this.salesNo.Enabled = false;
+            this.salesNo.Location = new System.Drawing.Point(589, 82);
+            this.salesNo.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.salesNo.Name = "salesNo";
+            this.salesNo.Size = new System.Drawing.Size(92, 29);
+            this.salesNo.TabIndex = 44;
+            // 
+            // cnfrmBtn
+            // 
+            this.cnfrmBtn.Enabled = false;
+            this.cnfrmBtn.Location = new System.Drawing.Point(922, 157);
+            this.cnfrmBtn.Name = "cnfrmBtn";
+            this.cnfrmBtn.Size = new System.Drawing.Size(160, 31);
+            this.cnfrmBtn.TabIndex = 49;
+            this.cnfrmBtn.Text = "Confirm";
+            this.cnfrmBtn.UseVisualStyleBackColor = true;
+            this.cnfrmBtn.Click += new System.EventHandler(this.cnfrmBtn_Click);
             // 
             // frmCustomers
             // 
@@ -488,9 +527,9 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.credit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgCustomers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.salesNo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -529,9 +568,10 @@
         private System.Windows.Forms.Button prevBtn;
         private System.Windows.Forms.NumericUpDown credit;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtaddressline2;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.NumericUpDown salesNo;
+        private System.Windows.Forms.Button cnfrmBtn;
     }
 }

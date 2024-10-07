@@ -72,5 +72,10 @@ namespace ProjectClassicModels
         {
             this.Close();
         }
+
+        private void materialDivider1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

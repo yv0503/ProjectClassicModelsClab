@@ -14,6 +14,7 @@ namespace ProjectClassicModels
     public partial class frmCustomers : Form
     {
         ClassicModels cm = new ClassicModels();
+        bool newOrEdit;
 
         public frmCustomers()
         {
@@ -33,33 +34,50 @@ namespace ProjectClassicModels
             cm.BindCustomerCity(cmbcity);
         }
 
-        private void BindCustomers(int e) 
+        private void BindCustomers(int e)
         {
 
-
             txtCustomerNumber.Text = dgCustomers.Rows[e].Cells[0].Value.ToString();
-            txtlastName.Text = dgCustomers.Rows[e].Cells[5].Value.ToString();
-            txtfirstName.Text = dgCustomers.Rows[e].Cells[6].Value.ToString();  
-            txtcontactNumber.Text = dgCustomers.Rows[e].Cells[7].Value.ToString();
-            txtaddressline.Text = dgCustomers.Rows[e].Cells[8].Value.ToString();
-            txtaddressline2.Text = dgCustomers.Rows[e].Cells[9].Value.ToString();
-            cmbpostalcode.Text = dgCustomers.Rows[e].Cells[10].Value.ToString();
+            txtlastName.Text = dgCustomers.Rows[e].Cells[4].Value.ToString();
+            txtfirstName.Text = dgCustomers.Rows[e].Cells[5].Value.ToString();
+            txtcontactNumber.Text = dgCustomers.Rows[e].Cells[6].Value.ToString();
+            txtaddressline.Text = dgCustomers.Rows[e].Cells[7].Value.ToString();
+            txtaddressline2.Text = dgCustomers.Rows[e].Cells[8].Value.ToString();
+            salesNo.Text = dgCustomers.Rows[e].Cells[10].Value.ToString();
             credit.Text = dgCustomers.Rows[e].Cells[11].Value.ToString();
+
 
             cm.BindCustomerCountry(cmbcountry);
             cm.BindCustomerState(cmbstate);
             cm.BindCustomerCity(cmbcity);
+            cm.BindPostalCode(cmbpostalcode);
 
-            cm.SelectedCity(cmbcity, dgCustomers.Rows[e].Cells[4].Value.ToString());
-            cm.SelectedState(cmbstate, dgCustomers.Rows[e].Cells[3].Value.ToString());
-            cm.SelectedCountry(cmbcountry, dgCustomers.Rows[e].Cells[2].Value.ToString());
+            SelectedCity(cmbcity, dgCustomers.Rows[e].Cells[4].Value.ToString());
+            SelectedState(cmbstate, dgCustomers.Rows[e].Cells[3].Value.ToString());
+            SelectedCountry(cmbcountry, dgCustomers.Rows[e].Cells[2].Value.ToString());
+            SelectedPostalCode(cmbpostalcode, dgCustomers.Rows[e].Cells[9].Value.ToString());
         }
 
-
-        private void newBtn_Click(object sender, EventArgs e)
+        private void PrevCustomers(int e)
         {
+            e = e - 1;
 
+            txtCustomerNumber.Text = dgCustomers.Rows[e].Cells[0].Value.ToString();
+            txtlastName.Text = dgCustomers.Rows[e].Cells[4].Value.ToString();
+            txtfirstName.Text = dgCustomers.Rows[e].Cells[5].Value.ToString();
+            txtcontactNumber.Text = dgCustomers.Rows[e].Cells[6].Value.ToString();
+            txtaddressline.Text = dgCustomers.Rows[e].Cells[7].Value.ToString();
+            txtaddressline2.Text = dgCustomers.Rows[e].Cells[8].Value.ToString();
+            salesNo.Text = dgCustomers.Rows[e].Cells[10].Value.ToString();
+            credit.Text = dgCustomers.Rows[e].Cells[11].Value.ToString();
+            cmbcity.Text = dgCustomers.Rows[e].Cells[4].Value.ToString();
+            cmbstate.Text = dgCustomers.Rows[e].Cells[3].Value.ToString();
+            cmbcountry.Text = dgCustomers.Rows[e].Cells[2].Value.ToString();
+            cmbpostalcode.Text = dgCustomers.Rows[e].Cells[9].Value.ToString();
         }
+
+
+
 
         private void EnableControls(bool val)
         {
@@ -71,12 +89,35 @@ namespace ProjectClassicModels
                 }
 
             }
+
+            foreach (Control ctrl in tabPage1.Controls)
+            {
+                ctrl.Enabled = val;
+                txtCustomerNumber.Enabled = false;
+
+
+                if (val == true)
+                {
+                    newBtn.Enabled = false;
+                    edtBtn.Enabled = false;
+                }
+                if (val == false) 
+                {
+                    prevBtn.Enabled = true;
+                    nxtBtn.Enabled = true;
+                    lstBtn.Enabled = true;
+                    frstBtn.Enabled = true;
+                    newBtn.Enabled = true;
+                    edtBtn.Enabled = true;
+                }
+            }
         }
 
         private void dgCustomers_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             customerTab.SelectedIndex = 0;
             BindCustomers(e.RowIndex);
+            EnableControls(false);
         }
 
 
@@ -188,10 +229,6 @@ namespace ProjectClassicModels
 
         }
 
-        private void cnlBtn_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void label6_Click_1(object sender, EventArgs e)
         {
@@ -202,5 +239,119 @@ namespace ProjectClassicModels
         {
 
         }
+
+        public void SelectedCity(ComboBox cb, string selectedCity)
+        {
+            for (int index = 0; index < cb.Items.Count; index++)
+            {
+                DataRowView rowView = cb.Items[index] as DataRowView;
+
+                if (rowView != null)
+                {
+                    string city = rowView["City"].ToString();
+
+                    if (city.Equals(selectedCity, StringComparison.OrdinalIgnoreCase))
+                    {
+                        cb.SelectedIndex = index;
+                        break;
+                    }
+                }
+
+            }
+        }
+
+        public void SelectedState(ComboBox cb, string selectedState)
+        {
+            for (int index = 0; index < cb.Items.Count; index++)
+            {
+                DataRowView rowView = cb.Items[index] as DataRowView;
+
+                if (rowView != null)
+                {
+                    string state = rowView["State"].ToString();
+
+                    if (state.Equals(selectedState, StringComparison.OrdinalIgnoreCase))
+                    {
+                        cb.SelectedIndex = index;
+                        break;
+                    }
+                }
+
+            }
+        }
+
+        public void SelectedCountry(ComboBox cb, string selectedCountry)
+        {
+            for (int index = 0; index < cb.Items.Count; index++)
+            {
+                DataRowView rowView = cb.Items[index] as DataRowView;
+
+                if (rowView != null)
+                {
+                    string country = rowView["Country"].ToString();
+
+                    if (country.Equals(selectedCountry, StringComparison.OrdinalIgnoreCase))
+                    {
+                        cb.SelectedIndex = index;
+                        break;
+                    }
+                }
+
+            }
+        }
+
+        public void SelectedPostalCode(ComboBox cb, string selectedPostalCode)
+        {
+            for (int index = 0; index < cb.Items.Count; index++)
+            {
+                DataRowView rowView = cb.Items[index] as DataRowView;
+
+                if (rowView != null)
+                {
+                    string country = rowView["postalCode"].ToString();
+
+                    if (country.Equals(selectedPostalCode, StringComparison.OrdinalIgnoreCase))
+                    {
+                        cb.SelectedIndex = index;
+                        break;
+                    }
+                }
+
+            }
+        }
+
+
+        private void edtBtn_Click(object sender, EventArgs e)
+        {
+            EnableControls(true);
+        }
+
+        private void dltBtn_Click(object sender, EventArgs e)
+        {
+            EnableControls(false);
+        }
+
+        private void cnlBtn_Click(object sender, EventArgs e)
+        {
+            EnableControls(false);
+        }
+
+        private void newBtn_Click(object sender, EventArgs e)
+        {
+            EnableControls(true);
+        }
+
+        private void cnfrmBtn_Click(object sender, EventArgs e)
+        {
+            EnableControls(false);
+
+        }
+
+        private void prevBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
+
 }
