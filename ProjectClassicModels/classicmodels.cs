@@ -78,7 +78,7 @@ namespace ProjectClassicModels
                     {
                         string query = "SELECT customerNumber AS 'Customer Number', customerName AS 'Customer Name', " +
                             "country AS Country, state, contactLastName, contactFirstName, Phone, addressLine1, " +
-                            "addressLine2, postalCode, salesRepEmployeeNumber ,creditLimit FROM customers";
+                            "addressLine2, postalCode, salesRepEmployeeNumber ,creditLimit, city FROM customers";
 
                         MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
 
@@ -236,8 +236,80 @@ namespace ProjectClassicModels
             }
         }
 
+        public void NewCustNumber(TextBox tb)
+        {
+            try
+            {
+                myConn = new MySqlConnection(connstring);
 
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+                        string query = "SELECT MAX(customerNumber) +1 AS newCustomerNumber FROM customers";
 
+                        MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
+
+                        DataSet ds = new DataSet();
+
+                        da.Fill(ds, "0");
+                        dt = ds.Tables["0"];
+
+                        tb.Text = dt.Rows[0][0].ToString();
+
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+        }
+
+        public void InsertNewCustomer(TextBox CustNo, TextBox CustLstName, TextBox CustFrstName, TextBox ContactNo, TextBox AddressLine1, TextBox AddressLine2,
+            ComboBox cmbcountry, ComboBox cmbstate, ComboBox cmbcity, ComboBox cmbpostalcode, NumericUpDown salesrep, NumericUpDown credit)
+        {
+            int a = Int32.Parse(CustNo.Text);
+            string b = CustLstName.Text;
+            string c = CustFrstName.Text;
+            string d = ContactNo.Text;
+            string e = AddressLine1.Text;
+            string f = AddressLine2.Text;
+            string g = cmbcountry.Text;
+            string h = cmbcity.Text;
+            string i = cmbpostalcode.Text;
+            string j = cmbstate.Text;
+            int k = Int32.Parse(salesrep.ToString());
+            decimal l = Int32.Parse(credit.ToString());
+            var m = b + " " + a;
+
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+                        string query = "INSERT INTO customers(customerNumber, customerName, contactLastName, " +
+                            "contactFirstName, phone, addressLine1, addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit)" +
+                            "VALUES("+a+", "+m+", "+b+","+c+", "+d+","+e+", "+f+","+g+", "+h+","+i+", "+j+","+k+", "+l+")";
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
+
+                        DataSet ds = new DataSet();
+
+                        MessageBox.Show("Customer Inputted");
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+        }
 
     }
 }

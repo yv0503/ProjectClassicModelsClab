@@ -153,7 +153,7 @@
             this.credit.Enabled = false;
             this.credit.Location = new System.Drawing.Point(752, 82);
             this.credit.Maximum = new decimal(new int[] {
-            999999,
+            999999999,
             0,
             0,
             0});
@@ -237,6 +237,7 @@
             // 
             // cnlBtn
             // 
+            this.cnlBtn.Enabled = false;
             this.cnlBtn.Location = new System.Drawing.Point(1005, 83);
             this.cnlBtn.Name = "cnlBtn";
             this.cnlBtn.Size = new System.Drawing.Size(77, 31);
@@ -247,6 +248,7 @@
             // 
             // dltBtn
             // 
+            this.dltBtn.Enabled = false;
             this.dltBtn.Location = new System.Drawing.Point(1005, 121);
             this.dltBtn.Name = "dltBtn";
             this.dltBtn.Size = new System.Drawing.Size(77, 31);

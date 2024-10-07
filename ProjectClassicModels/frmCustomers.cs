@@ -52,7 +52,7 @@ namespace ProjectClassicModels
             cm.BindCustomerCity(cmbcity);
             cm.BindPostalCode(cmbpostalcode);
 
-            SelectedCity(cmbcity, dgCustomers.Rows[e].Cells[4].Value.ToString());
+            SelectedCity(cmbcity, dgCustomers.Rows[e].Cells[12].Value.ToString());
             SelectedState(cmbstate, dgCustomers.Rows[e].Cells[3].Value.ToString());
             SelectedCountry(cmbcountry, dgCustomers.Rows[e].Cells[2].Value.ToString());
             SelectedPostalCode(cmbpostalcode, dgCustomers.Rows[e].Cells[9].Value.ToString());
@@ -100,6 +100,10 @@ namespace ProjectClassicModels
                 {
                     newBtn.Enabled = false;
                     edtBtn.Enabled = false;
+                    prevBtn.Enabled = false;
+                    nxtBtn.Enabled = false;
+                    lstBtn.Enabled = false;
+                    frstBtn.Enabled = false;
                 }
                 if (val == false) 
                 {
@@ -320,6 +324,24 @@ namespace ProjectClassicModels
             }
         }
 
+        public void NewCustomers()
+        {
+            txtCustomerNumber.Text = "";
+            txtlastName.Text = "";
+            txtfirstName.Text = "";
+            txtcontactNumber.Text = "";
+            txtaddressline.Text = "";
+            txtaddressline2.Text = "";
+            salesNo.Text = "";
+            credit.Text = "";
+            cmbcity.Text = "";
+            cmbstate.Text = "";
+            cmbcountry.Text = "";
+            cmbpostalcode.Text = "";
+
+            cm.NewCustNumber(txtCustomerNumber);
+        }
+
 
         private void edtBtn_Click(object sender, EventArgs e)
         {
@@ -339,11 +361,24 @@ namespace ProjectClassicModels
         private void newBtn_Click(object sender, EventArgs e)
         {
             EnableControls(true);
+            dltBtn.Enabled = false;
+            NewCustomers();
         }
 
         private void cnfrmBtn_Click(object sender, EventArgs e)
         {
             EnableControls(false);
+
+            if (newOrEdit == false)
+            {
+                cm.InsertNewCustomer(txtCustomerNumber, txtlastName, txtfirstName, txtcontactNumber, txtaddressline, txtaddressline2, cmbcountry, cmbstate, cmbcity
+                    , cmbpostalcode, salesNo, credit);
+            }
+
+            else if (newOrEdit == true)
+            {
+                //cm.EditCustomer();
+            }
 
         }
 
