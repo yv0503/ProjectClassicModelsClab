@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Google.Protobuf.WellKnownTypes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,9 +11,9 @@ using System.Windows.Forms;
 
 namespace ProjectClassicModels
 {
-    public partial class main : Form
+    public partial class frmMain : Form
     {
-        public main()
+        public frmMain()
         {
             InitializeComponent();
         }
@@ -44,8 +45,8 @@ namespace ProjectClassicModels
 
         private void custTab_Click(object sender, EventArgs e)
         {
-            Form customers = new customers();
-            customers.Show();
+            Form childForm = new frmCustomers();
+            childForm.Show();
         }
     }
 }

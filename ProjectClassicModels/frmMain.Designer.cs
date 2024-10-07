@@ -1,6 +1,6 @@
 ﻿namespace ProjectClassicModels
 {
-    partial class main
+    partial class frmMain
     {
         /// <summary>
         /// Required designer variable.
@@ -71,32 +71,32 @@
             // custTab
             // 
             this.custTab.Name = "custTab";
-            this.custTab.Size = new System.Drawing.Size(180, 22);
+            this.custTab.Size = new System.Drawing.Size(131, 22);
             this.custTab.Text = "Customers";
             this.custTab.Click += new System.EventHandler(this.custTab_Click);
             // 
             // empTab
             // 
             this.empTab.Name = "empTab";
-            this.empTab.Size = new System.Drawing.Size(180, 22);
+            this.empTab.Size = new System.Drawing.Size(131, 22);
             this.empTab.Text = "Employees";
             // 
             // offTab
             // 
             this.offTab.Name = "offTab";
-            this.offTab.Size = new System.Drawing.Size(180, 22);
+            this.offTab.Size = new System.Drawing.Size(131, 22);
             this.offTab.Text = "Offices";
             // 
             // ordersToolStripMenuItem
             // 
             this.ordersToolStripMenuItem.Name = "ordersToolStripMenuItem";
-            this.ordersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ordersToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.ordersToolStripMenuItem.Text = "Orders";
             // 
             // productsToolStripMenuItem
             // 
             this.productsToolStripMenuItem.Name = "productsToolStripMenuItem";
-            this.productsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.productsToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.productsToolStripMenuItem.Text = "Products";
             // 
             // transactionsToolStripMenuItem
@@ -110,7 +110,7 @@
             // paymentsToolStripMenuItem
             // 
             this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
-            this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.paymentsToolStripMenuItem.Text = "Payments";
             // 
             // reportsToolStripMenuItem
@@ -124,10 +124,10 @@
             // salesToolStripMenuItem
             // 
             this.salesToolStripMenuItem.Name = "salesToolStripMenuItem";
-            this.salesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salesToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.salesToolStripMenuItem.Text = "Sales";
             // 
-            // main
+            // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -135,7 +135,7 @@
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "main";
+            this.Name = "frmMain";
             this.Text = "Main";
             this.Load += new System.EventHandler(this.main_Load);
             this.menuStrip1.ResumeLayout(false);

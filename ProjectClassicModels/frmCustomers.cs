@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace ProjectClassicModels
 {
-    public partial class customers : Form
+    public partial class frmCustomers : Form
     {
         ClassicModels cm = new ClassicModels();
 
-        public customers()
+        public frmCustomers()
         {
             InitializeComponent();
         }

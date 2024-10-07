@@ -16,7 +16,7 @@ namespace ProjectClassicModels
         private MySqlCommand myCommand = new MySqlCommand();
         private MySqlDataAdapter mydataAdapter = new MySqlDataAdapter();
         private DataTable dt = new DataTable();
-        //private MySqlDataReader MySqlDataReader = null;
+        private MySqlDataReader MySqlDataReader = null;
 
         private string connstring = @"server=localhost;userid=root;password=Cake!070503;database=classicmodels";
 

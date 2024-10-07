@@ -1,6 +1,6 @@
 ﻿namespace ProjectClassicModels
 {
-    partial class customers
+    partial class frmCustomers
     {
         /// <summary>
         /// Required designer variable.
@@ -30,6 +30,8 @@
         {
             this.customerTab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtaddressline2 = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.credit = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
@@ -62,8 +64,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgCustomers = new System.Windows.Forms.DataGridView();
-            this.txtaddressline2 = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.customerTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.credit)).BeginInit();
@@ -82,7 +82,7 @@
             this.customerTab.Location = new System.Drawing.Point(13, 13);
             this.customerTab.Name = "customerTab";
             this.customerTab.SelectedIndex = 0;
-            this.customerTab.Size = new System.Drawing.Size(727, 336);
+            this.customerTab.Size = new System.Drawing.Size(1096, 400);
             this.customerTab.TabIndex = 0;
             this.customerTab.SelectedIndexChanged += new System.EventHandler(this.customerTab_SelectedIndexChanged);
             // 
@@ -123,14 +123,31 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 33);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(719, 299);
+            this.tabPage1.Size = new System.Drawing.Size(1088, 363);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "New Customers";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // txtaddressline2
+            // 
+            this.txtaddressline2.Location = new System.Drawing.Point(589, 48);
+            this.txtaddressline2.Name = "txtaddressline2";
+            this.txtaddressline2.Size = new System.Drawing.Size(493, 29);
+            this.txtaddressline2.TabIndex = 48;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(452, 51);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(136, 24);
+            this.label12.TabIndex = 47;
+            this.label12.Text = "AddressLine 2 ";
+            this.label12.Click += new System.EventHandler(this.label12_Click);
+            // 
             // credit
             // 
-            this.credit.Location = new System.Drawing.Point(553, 196);
+            this.credit.Location = new System.Drawing.Point(752, 82);
             this.credit.Name = "credit";
             this.credit.Size = new System.Drawing.Size(77, 29);
             this.credit.TabIndex = 46;
@@ -138,7 +155,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(484, 196);
+            this.label11.Location = new System.Drawing.Point(687, 85);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(59, 24);
             this.label11.TabIndex = 45;
@@ -147,7 +164,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(553, 161);
+            this.numericUpDown1.Location = new System.Drawing.Point(589, 82);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(77, 29);
             this.numericUpDown1.TabIndex = 44;
@@ -155,7 +172,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(452, 163);
+            this.label7.Location = new System.Drawing.Point(492, 87);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(91, 24);
             this.label7.TabIndex = 43;
@@ -163,7 +180,7 @@
             // 
             // frstBtn
             // 
-            this.frstBtn.Location = new System.Drawing.Point(166, 269);
+            this.frstBtn.Location = new System.Drawing.Point(292, 311);
             this.frstBtn.Name = "frstBtn";
             this.frstBtn.Size = new System.Drawing.Size(77, 31);
             this.frstBtn.TabIndex = 42;
@@ -172,7 +189,7 @@
             // 
             // lstBtn
             // 
-            this.lstBtn.Location = new System.Drawing.Point(249, 269);
+            this.lstBtn.Location = new System.Drawing.Point(375, 311);
             this.lstBtn.Name = "lstBtn";
             this.lstBtn.Size = new System.Drawing.Size(77, 31);
             this.lstBtn.TabIndex = 41;
@@ -181,7 +198,7 @@
             // 
             // nxtBtn
             // 
-            this.nxtBtn.Location = new System.Drawing.Point(83, 268);
+            this.nxtBtn.Location = new System.Drawing.Point(209, 310);
             this.nxtBtn.Name = "nxtBtn";
             this.nxtBtn.Size = new System.Drawing.Size(77, 31);
             this.nxtBtn.TabIndex = 40;
@@ -190,7 +207,7 @@
             // 
             // prevBtn
             // 
-            this.prevBtn.Location = new System.Drawing.Point(0, 268);
+            this.prevBtn.Location = new System.Drawing.Point(126, 310);
             this.prevBtn.Name = "prevBtn";
             this.prevBtn.Size = new System.Drawing.Size(77, 31);
             this.prevBtn.TabIndex = 39;
@@ -199,15 +216,15 @@
             // 
             // txtaddressline
             // 
-            this.txtaddressline.Location = new System.Drawing.Point(456, 69);
+            this.txtaddressline.Location = new System.Drawing.Point(589, 12);
             this.txtaddressline.Name = "txtaddressline";
-            this.txtaddressline.Size = new System.Drawing.Size(257, 29);
+            this.txtaddressline.Size = new System.Drawing.Size(493, 29);
             this.txtaddressline.TabIndex = 38;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(452, 42);
+            this.label1.Location = new System.Drawing.Point(452, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(131, 24);
             this.label1.TabIndex = 37;
@@ -216,7 +233,7 @@
             // 
             // cnlBtn
             // 
-            this.cnlBtn.Location = new System.Drawing.Point(636, 227);
+            this.cnlBtn.Location = new System.Drawing.Point(1005, 83);
             this.cnlBtn.Name = "cnlBtn";
             this.cnlBtn.Size = new System.Drawing.Size(77, 31);
             this.cnlBtn.TabIndex = 36;
@@ -226,7 +243,7 @@
             // 
             // dltBtn
             // 
-            this.dltBtn.Location = new System.Drawing.Point(636, 265);
+            this.dltBtn.Location = new System.Drawing.Point(1005, 121);
             this.dltBtn.Name = "dltBtn";
             this.dltBtn.Size = new System.Drawing.Size(77, 31);
             this.dltBtn.TabIndex = 35;
@@ -235,7 +252,7 @@
             // 
             // edtBtn
             // 
-            this.edtBtn.Location = new System.Drawing.Point(553, 264);
+            this.edtBtn.Location = new System.Drawing.Point(922, 120);
             this.edtBtn.Name = "edtBtn";
             this.edtBtn.Size = new System.Drawing.Size(77, 31);
             this.edtBtn.TabIndex = 34;
@@ -244,7 +261,7 @@
             // 
             // newBtn
             // 
-            this.newBtn.Location = new System.Drawing.Point(553, 227);
+            this.newBtn.Location = new System.Drawing.Point(922, 84);
             this.newBtn.Name = "newBtn";
             this.newBtn.Size = new System.Drawing.Size(77, 31);
             this.newBtn.TabIndex = 33;
@@ -255,9 +272,9 @@
             // cmbpostalcode
             // 
             this.cmbpostalcode.FormattingEnabled = true;
-            this.cmbpostalcode.Location = new System.Drawing.Point(576, 7);
+            this.cmbpostalcode.Location = new System.Drawing.Point(184, 269);
             this.cmbpostalcode.Name = "cmbpostalcode";
-            this.cmbpostalcode.Size = new System.Drawing.Size(137, 32);
+            this.cmbpostalcode.Size = new System.Drawing.Size(238, 32);
             this.cmbpostalcode.TabIndex = 32;
             // 
             // cmbcity
@@ -355,7 +372,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(452, 4);
+            this.label8.Location = new System.Drawing.Point(60, 262);
             this.label8.Margin = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.label8.Name = "label8";
             this.label8.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
@@ -455,33 +472,16 @@
             this.dgCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCustomers_CellContentClick);
             this.dgCustomers.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCustomers_CellContentDoubleClick);
             // 
-            // txtaddressline2
-            // 
-            this.txtaddressline2.Location = new System.Drawing.Point(456, 128);
-            this.txtaddressline2.Name = "txtaddressline2";
-            this.txtaddressline2.Size = new System.Drawing.Size(257, 29);
-            this.txtaddressline2.TabIndex = 48;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(452, 101);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(136, 24);
-            this.label12.TabIndex = 47;
-            this.label12.Text = "AddressLine 2 ";
-            this.label12.Click += new System.EventHandler(this.label12_Click);
-            // 
-            // customers
+            // frmCustomers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(752, 361);
+            this.ClientSize = new System.Drawing.Size(1121, 425);
             this.Controls.Add(this.customerTab);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IsMdiContainer = true;
             this.Margin = new System.Windows.Forms.Padding(6);
-            this.Name = "customers";
+            this.Name = "frmCustomers";
             this.Text = "Customers";
             this.Load += new System.EventHandler(this.customers_Load);
             this.customerTab.ResumeLayout(false);
