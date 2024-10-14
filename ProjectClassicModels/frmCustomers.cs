@@ -44,7 +44,7 @@ namespace ProjectClassicModels
             txtcontactNumber.Text = dgCustomers.Rows[e].Cells[6].Value.ToString();
             txtaddressline.Text = dgCustomers.Rows[e].Cells[7].Value.ToString();
             txtaddressline2.Text = dgCustomers.Rows[e].Cells[8].Value.ToString();
-            salesNo.Text = dgCustomers.Rows[e].Cells[10].Value.ToString();
+            salesRep.Text = dgCustomers.Rows[e].Cells[10].Value.ToString();
             credit.Text = dgCustomers.Rows[e].Cells[11].Value.ToString();
 
 
@@ -68,17 +68,13 @@ namespace ProjectClassicModels
             txtcontactNumber.Text = dgCustomers.Rows[e].Cells[6].Value.ToString();
             txtaddressline.Text = dgCustomers.Rows[e].Cells[7].Value.ToString();
             txtaddressline2.Text = dgCustomers.Rows[e].Cells[8].Value.ToString();
-            salesNo.Text = dgCustomers.Rows[e].Cells[10].Value.ToString();
+            salesRep.Text = dgCustomers.Rows[e].Cells[10].Value.ToString();
             credit.Text = dgCustomers.Rows[e].Cells[11].Value.ToString();
-            cmbcity.Text = dgCustomers.Rows[e].Cells[4].Value.ToString();
+            cmbcity.Text = dgCustomers.Rows[e].Cells[12].Value.ToString();
             cmbstate.Text = dgCustomers.Rows[e].Cells[3].Value.ToString();
             cmbcountry.Text = dgCustomers.Rows[e].Cells[2].Value.ToString();
             cmbpostalcode.Text = dgCustomers.Rows[e].Cells[9].Value.ToString();
         }
-
-
-
-
 
         private void EnableControls(bool val)
         {
@@ -333,7 +329,7 @@ namespace ProjectClassicModels
             txtcontactNumber.Text = "";
             txtaddressline.Text = "";
             txtaddressline2.Text = "";
-            salesNo.Text = "";
+            salesRep.Text = "";
             credit.Text = "";
             cmbcity.Text = "";
             cmbstate.Text = "";
@@ -347,11 +343,18 @@ namespace ProjectClassicModels
         private void edtBtn_Click(object sender, EventArgs e)
         {
             EnableControls(true);
+            newOrEdit = true;
         }
 
         private void dltBtn_Click(object sender, EventArgs e)
         {
             EnableControls(false);
+            cm.DeleteCustomer(txtCustomerNumber);
+            cm.SelectCustomers(dgCustomers);
+            cm.BindCustomerCountry(cmbcountry);
+            cm.BindCustomerState(cmbstate);
+            cm.BindCustomerCity(cmbcity);
+            BindCustomers(1);
         }
 
         private void cnlBtn_Click(object sender, EventArgs e)
@@ -364,6 +367,7 @@ namespace ProjectClassicModels
             EnableControls(true);
             dltBtn.Enabled = false;
             NewCustomers();
+            newOrEdit = false;
         }
 
         private void cnfrmBtn_Click(object sender, EventArgs e)
@@ -373,12 +377,24 @@ namespace ProjectClassicModels
             if (newOrEdit == false)
             {
                 cm.InsertNewCustomer(txtCustomerNumber, txtlastName, txtfirstName, txtcontactNumber, txtaddressline, txtaddressline2, cmbcountry, cmbstate, cmbcity
-                    , cmbpostalcode, salesNo, credit);
+                    , cmbpostalcode, salesRep, credit);
+                cm.SelectCustomers(dgCustomers);
+                BindCustomers(dgCustomers.Rows.Count - 2);
             }
 
             else if (newOrEdit == true)
             {
-                //cm.EditCustomer();
+                cm.UpdateCustomer(txtCustomerNumber, txtlastName, txtfirstName, txtcontactNumber, txtaddressline, txtaddressline2, cmbcountry, cmbstate, cmbcity
+                    , cmbpostalcode, salesRep, credit);
+                cm.SelectCustomers(dgCustomers);
+                for (int n = 0; n < dgCustomers.Rows.Count; n++)
+                {
+                    if (txtCustomerNumber.Text == dgCustomers.Rows[n].Cells[0].Value.ToString())
+                    {
+                        FirstPrevNextLast(n);
+                        break;
+                    }
+                }
             }
 
         }
@@ -449,6 +465,11 @@ namespace ProjectClassicModels
             nxtBtn.Enabled = false;
             frstBtn.Enabled = true;
             prevBtn.Enabled = true;
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

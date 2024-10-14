@@ -33,9 +33,7 @@
             this.cnfrmBtn = new System.Windows.Forms.Button();
             this.txtaddressline2 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.credit = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
-            this.salesNo = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.frstBtn = new System.Windows.Forms.Button();
             this.lstBtn = new System.Windows.Forms.Button();
@@ -65,10 +63,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgCustomers = new System.Windows.Forms.DataGridView();
+            this.salesRep = new System.Windows.Forms.TextBox();
+            this.credit = new System.Windows.Forms.TextBox();
             this.customerTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.credit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.salesNo)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgCustomers)).BeginInit();
             this.SuspendLayout();
@@ -89,12 +87,12 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.credit);
+            this.tabPage1.Controls.Add(this.salesRep);
             this.tabPage1.Controls.Add(this.cnfrmBtn);
             this.tabPage1.Controls.Add(this.txtaddressline2);
             this.tabPage1.Controls.Add(this.label12);
-            this.tabPage1.Controls.Add(this.credit);
             this.tabPage1.Controls.Add(this.label11);
-            this.tabPage1.Controls.Add(this.salesNo);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.frstBtn);
             this.tabPage1.Controls.Add(this.lstBtn);
@@ -159,19 +157,6 @@
             this.label12.Text = "AddressLine 2 ";
             this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
-            // credit
-            // 
-            this.credit.Enabled = false;
-            this.credit.Location = new System.Drawing.Point(752, 82);
-            this.credit.Maximum = new decimal(new int[] {
-            999999999,
-            0,
-            0,
-            0});
-            this.credit.Name = "credit";
-            this.credit.Size = new System.Drawing.Size(164, 29);
-            this.credit.TabIndex = 46;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -181,19 +166,6 @@
             this.label11.TabIndex = 45;
             this.label11.Text = "Credit";
             this.label11.Click += new System.EventHandler(this.label11_Click);
-            // 
-            // salesNo
-            // 
-            this.salesNo.Enabled = false;
-            this.salesNo.Location = new System.Drawing.Point(589, 82);
-            this.salesNo.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.salesNo.Name = "salesNo";
-            this.salesNo.Size = new System.Drawing.Size(92, 29);
-            this.salesNo.TabIndex = 44;
             // 
             // label7
             // 
@@ -206,7 +178,7 @@
             // 
             // frstBtn
             // 
-            this.frstBtn.Location = new System.Drawing.Point(292, 311);
+            this.frstBtn.Location = new System.Drawing.Point(126, 311);
             this.frstBtn.Name = "frstBtn";
             this.frstBtn.Size = new System.Drawing.Size(77, 31);
             this.frstBtn.TabIndex = 42;
@@ -226,7 +198,7 @@
             // 
             // nxtBtn
             // 
-            this.nxtBtn.Location = new System.Drawing.Point(209, 310);
+            this.nxtBtn.Location = new System.Drawing.Point(292, 311);
             this.nxtBtn.Name = "nxtBtn";
             this.nxtBtn.Size = new System.Drawing.Size(77, 31);
             this.nxtBtn.TabIndex = 40;
@@ -236,7 +208,7 @@
             // 
             // prevBtn
             // 
-            this.prevBtn.Location = new System.Drawing.Point(126, 310);
+            this.prevBtn.Location = new System.Drawing.Point(209, 311);
             this.prevBtn.Name = "prevBtn";
             this.prevBtn.Size = new System.Drawing.Size(77, 31);
             this.prevBtn.TabIndex = 39;
@@ -516,6 +488,23 @@
             this.dgCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCustomers_CellContentClick);
             this.dgCustomers.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCustomers_CellContentDoubleClick);
             // 
+            // salesRep
+            // 
+            this.salesRep.Enabled = false;
+            this.salesRep.Location = new System.Drawing.Point(589, 85);
+            this.salesRep.Name = "salesRep";
+            this.salesRep.Size = new System.Drawing.Size(92, 29);
+            this.salesRep.TabIndex = 50;
+            // 
+            // credit
+            // 
+            this.credit.Enabled = false;
+            this.credit.Location = new System.Drawing.Point(748, 85);
+            this.credit.Name = "credit";
+            this.credit.Size = new System.Drawing.Size(168, 29);
+            this.credit.TabIndex = 51;
+            this.credit.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
             // frmCustomers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -526,13 +515,12 @@
             this.IsMdiContainer = true;
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "frmCustomers";
+            this.RightToLeftLayout = true;
             this.Text = "Customers";
             this.Load += new System.EventHandler(this.customers_Load);
             this.customerTab.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.credit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.salesNo)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgCustomers)).EndInit();
             this.ResumeLayout(false);
@@ -571,12 +559,12 @@
         private System.Windows.Forms.Button lstBtn;
         private System.Windows.Forms.Button nxtBtn;
         private System.Windows.Forms.Button prevBtn;
-        private System.Windows.Forms.NumericUpDown credit;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtaddressline2;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.NumericUpDown salesNo;
         private System.Windows.Forms.Button cnfrmBtn;
+        private System.Windows.Forms.TextBox credit;
+        private System.Windows.Forms.TextBox salesRep;
     }
 }
