@@ -16,6 +16,7 @@ namespace ProjectClassicModels
         ClassicModels cm = new ClassicModels();
         bool newOrEdit;
 
+
         public frmCustomers()
         {
             InitializeComponent();
@@ -32,11 +33,11 @@ namespace ProjectClassicModels
             cm.BindCustomerCountry(cmbcountry);
             cm.BindCustomerState(cmbstate);
             cm.BindCustomerCity(cmbcity);
+            BindCustomers(1);
         }
 
         private void BindCustomers(int e)
         {
-
             txtCustomerNumber.Text = dgCustomers.Rows[e].Cells[0].Value.ToString();
             txtlastName.Text = dgCustomers.Rows[e].Cells[4].Value.ToString();
             txtfirstName.Text = dgCustomers.Rows[e].Cells[5].Value.ToString();
@@ -56,12 +57,11 @@ namespace ProjectClassicModels
             SelectedState(cmbstate, dgCustomers.Rows[e].Cells[3].Value.ToString());
             SelectedCountry(cmbcountry, dgCustomers.Rows[e].Cells[2].Value.ToString());
             SelectedPostalCode(cmbpostalcode, dgCustomers.Rows[e].Cells[9].Value.ToString());
+
         }
 
-        private void PrevCustomers(int e)
+        private void FirstPrevNextLast(int e)
         {
-            e = e - 1;
-
             txtCustomerNumber.Text = dgCustomers.Rows[e].Cells[0].Value.ToString();
             txtlastName.Text = dgCustomers.Rows[e].Cells[4].Value.ToString();
             txtfirstName.Text = dgCustomers.Rows[e].Cells[5].Value.ToString();
@@ -75,6 +75,7 @@ namespace ProjectClassicModels
             cmbcountry.Text = dgCustomers.Rows[e].Cells[2].Value.ToString();
             cmbpostalcode.Text = dgCustomers.Rows[e].Cells[9].Value.ToString();
         }
+
 
 
 
@@ -384,9 +385,71 @@ namespace ProjectClassicModels
 
         private void prevBtn_Click(object sender, EventArgs e)
         {
+            for (int n = 0; n < dgCustomers.Rows.Count; n++)
+            {
+                if (txtCustomerNumber.Text == dgCustomers.Rows[n].Cells[0].Value.ToString())
+                {
+                    FirstPrevNextLast(n-1);
+                    break;
+                }
+            }
 
+            if (txtCustomerNumber.Text == dgCustomers.Rows[0].Cells[0].Value.ToString())
+            {
+                prevBtn.Enabled = false;
+                frstBtn.Enabled = false;
+            }
+            else 
+            {
+                lstBtn.Enabled = true;
+                nxtBtn.Enabled = true;
+                frstBtn.Enabled = true;
+                prevBtn.Enabled = true;
+            }
+            
         }
 
+        private void nxtBtn_Click(object sender, EventArgs e)
+        {
+            for (int n = 0; n < dgCustomers.Rows.Count; n++)
+            {
+                if (txtCustomerNumber.Text == dgCustomers.Rows[n].Cells[0].Value.ToString())
+                {
+                    FirstPrevNextLast(n + 1);
+                    break;
+                }
+            }
+            if (txtCustomerNumber.Text == dgCustomers.Rows[dgCustomers.Rows.Count - 2].Cells[0].Value.ToString())
+            {
+                lstBtn.Enabled = false;
+                nxtBtn.Enabled = false;
+            }
+            else {
+
+                lstBtn.Enabled = true;
+                nxtBtn.Enabled = true;
+                frstBtn.Enabled = true;
+                prevBtn.Enabled = true;
+            }
+        }
+
+        private void frstBtn_Click(object sender, EventArgs e)
+        {
+            FirstPrevNextLast(1);
+            frstBtn.Enabled = false;
+            prevBtn.Enabled = false;
+            lstBtn.Enabled = true;
+            nxtBtn.Enabled = true;
+        }
+
+        private void lstBtn_Click(object sender, EventArgs e)
+        {
+            FirstPrevNextLast(dgCustomers.Rows.Count - 2);
+            lstBtn.Enabled = false;
+            nxtBtn.Enabled = false;
+            frstBtn.Enabled = true;
+            prevBtn.Enabled = true;
+        }
     }
 
 }

@@ -30,10 +30,12 @@
         {
             this.customerTab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.cnfrmBtn = new System.Windows.Forms.Button();
             this.txtaddressline2 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.credit = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
+            this.salesNo = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.frstBtn = new System.Windows.Forms.Button();
             this.lstBtn = new System.Windows.Forms.Button();
@@ -63,14 +65,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgCustomers = new System.Windows.Forms.DataGridView();
-            this.salesNo = new System.Windows.Forms.NumericUpDown();
-            this.cnfrmBtn = new System.Windows.Forms.Button();
             this.customerTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.credit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.salesNo)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgCustomers)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.salesNo)).BeginInit();
             this.SuspendLayout();
             // 
             // customerTab
@@ -130,6 +130,17 @@
             this.tabPage1.Text = "New Customers";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // cnfrmBtn
+            // 
+            this.cnfrmBtn.Enabled = false;
+            this.cnfrmBtn.Location = new System.Drawing.Point(922, 157);
+            this.cnfrmBtn.Name = "cnfrmBtn";
+            this.cnfrmBtn.Size = new System.Drawing.Size(160, 31);
+            this.cnfrmBtn.TabIndex = 49;
+            this.cnfrmBtn.Text = "Confirm";
+            this.cnfrmBtn.UseVisualStyleBackColor = true;
+            this.cnfrmBtn.Click += new System.EventHandler(this.cnfrmBtn_Click);
+            // 
             // txtaddressline2
             // 
             this.txtaddressline2.Enabled = false;
@@ -171,6 +182,19 @@
             this.label11.Text = "Credit";
             this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
+            // salesNo
+            // 
+            this.salesNo.Enabled = false;
+            this.salesNo.Location = new System.Drawing.Point(589, 82);
+            this.salesNo.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.salesNo.Name = "salesNo";
+            this.salesNo.Size = new System.Drawing.Size(92, 29);
+            this.salesNo.TabIndex = 44;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -188,6 +212,7 @@
             this.frstBtn.TabIndex = 42;
             this.frstBtn.Text = "First";
             this.frstBtn.UseVisualStyleBackColor = true;
+            this.frstBtn.Click += new System.EventHandler(this.frstBtn_Click);
             // 
             // lstBtn
             // 
@@ -197,6 +222,7 @@
             this.lstBtn.TabIndex = 41;
             this.lstBtn.Text = "Last";
             this.lstBtn.UseVisualStyleBackColor = true;
+            this.lstBtn.Click += new System.EventHandler(this.lstBtn_Click);
             // 
             // nxtBtn
             // 
@@ -206,6 +232,7 @@
             this.nxtBtn.TabIndex = 40;
             this.nxtBtn.Text = "Next";
             this.nxtBtn.UseVisualStyleBackColor = true;
+            this.nxtBtn.Click += new System.EventHandler(this.nxtBtn_Click);
             // 
             // prevBtn
             // 
@@ -489,30 +516,6 @@
             this.dgCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCustomers_CellContentClick);
             this.dgCustomers.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCustomers_CellContentDoubleClick);
             // 
-            // salesNo
-            // 
-            this.salesNo.Enabled = false;
-            this.salesNo.Location = new System.Drawing.Point(589, 82);
-            this.salesNo.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.salesNo.Name = "salesNo";
-            this.salesNo.Size = new System.Drawing.Size(92, 29);
-            this.salesNo.TabIndex = 44;
-            // 
-            // cnfrmBtn
-            // 
-            this.cnfrmBtn.Enabled = false;
-            this.cnfrmBtn.Location = new System.Drawing.Point(922, 157);
-            this.cnfrmBtn.Name = "cnfrmBtn";
-            this.cnfrmBtn.Size = new System.Drawing.Size(160, 31);
-            this.cnfrmBtn.TabIndex = 49;
-            this.cnfrmBtn.Text = "Confirm";
-            this.cnfrmBtn.UseVisualStyleBackColor = true;
-            this.cnfrmBtn.Click += new System.EventHandler(this.cnfrmBtn_Click);
-            // 
             // frmCustomers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -529,9 +532,9 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.credit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.salesNo)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgCustomers)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.salesNo)).EndInit();
             this.ResumeLayout(false);
 
         }
