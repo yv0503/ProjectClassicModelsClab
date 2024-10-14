@@ -34,6 +34,8 @@ namespace ProjectClassicModels
             cm.BindCustomerState(cmbstate);
             cm.BindCustomerCity(cmbcity);
             BindCustomers(1);
+
+ 
         }
 
         private void BindCustomers(int e)
