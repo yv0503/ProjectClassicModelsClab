@@ -34,10 +34,15 @@ namespace ProjectClassicModels
         {
             if (cm.Authentication(username.Text.Trim(), password.Text.Trim()))
             {
+                this.Hide();
                 Form main = new frmMain();
-                main.Show();
+                main.ShowDialog();
+                main = null;
+                this.Show();
+                
             }
         }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
         }

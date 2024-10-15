@@ -16,6 +16,7 @@ namespace ProjectClassicModels
         ClassicModels cm = new ClassicModels();
         bool newOrEdit;
 
+
         public frmCustomers()
         {
             InitializeComponent();
@@ -30,54 +31,56 @@ namespace ProjectClassicModels
         {
             cm.SelectCustomers(dgCustomers);
             cm.BindCustomerCountry(cmbcountry);
-            cm.BindCustomerState(cmbstate);
-            cm.BindCustomerCity(cmbcity);
+            cm.BindCustomerState(cmbstate, cmbcountry);
+            cm.BindCustomerCity(cmbcity, cmbcountry);
+            cm.BindPostalCode(cmbpostalcode, cmbcountry);
+            cm.BindSalesRep(salesRep);
+            BindCustomers(1);
+
+ 
         }
 
         private void BindCustomers(int e)
         {
-
             txtCustomerNumber.Text = dgCustomers.Rows[e].Cells[0].Value.ToString();
+            txtcustName.Text = dgCustomers.Rows[e].Cells[1].Value.ToString();
             txtlastName.Text = dgCustomers.Rows[e].Cells[4].Value.ToString();
             txtfirstName.Text = dgCustomers.Rows[e].Cells[5].Value.ToString();
             txtcontactNumber.Text = dgCustomers.Rows[e].Cells[6].Value.ToString();
             txtaddressline.Text = dgCustomers.Rows[e].Cells[7].Value.ToString();
             txtaddressline2.Text = dgCustomers.Rows[e].Cells[8].Value.ToString();
-            salesNo.Text = dgCustomers.Rows[e].Cells[10].Value.ToString();
+            salesRep.Text = dgCustomers.Rows[e].Cells[10].Value.ToString();
             credit.Text = dgCustomers.Rows[e].Cells[11].Value.ToString();
 
 
             cm.BindCustomerCountry(cmbcountry);
-            cm.BindCustomerState(cmbstate);
-            cm.BindCustomerCity(cmbcity);
-            cm.BindPostalCode(cmbpostalcode);
+            cm.BindCustomerState(cmbstate, cmbcountry);
+            cm.BindCustomerCity(cmbcity, cmbcountry);
+            cm.BindPostalCode(cmbpostalcode, cmbcountry);
 
             SelectedCity(cmbcity, dgCustomers.Rows[e].Cells[12].Value.ToString());
             SelectedState(cmbstate, dgCustomers.Rows[e].Cells[3].Value.ToString());
             SelectedCountry(cmbcountry, dgCustomers.Rows[e].Cells[2].Value.ToString());
             SelectedPostalCode(cmbpostalcode, dgCustomers.Rows[e].Cells[9].Value.ToString());
+
         }
 
-        private void PrevCustomers(int e)
+        private void FirstPrevNextLast(int e)
         {
-            e = e - 1;
-
             txtCustomerNumber.Text = dgCustomers.Rows[e].Cells[0].Value.ToString();
+            txtcustName.Text = dgCustomers.Rows[e].Cells[1].Value.ToString();
             txtlastName.Text = dgCustomers.Rows[e].Cells[4].Value.ToString();
             txtfirstName.Text = dgCustomers.Rows[e].Cells[5].Value.ToString();
             txtcontactNumber.Text = dgCustomers.Rows[e].Cells[6].Value.ToString();
             txtaddressline.Text = dgCustomers.Rows[e].Cells[7].Value.ToString();
             txtaddressline2.Text = dgCustomers.Rows[e].Cells[8].Value.ToString();
-            salesNo.Text = dgCustomers.Rows[e].Cells[10].Value.ToString();
+            salesRep.Text = dgCustomers.Rows[e].Cells[10].Value.ToString();
             credit.Text = dgCustomers.Rows[e].Cells[11].Value.ToString();
-            cmbcity.Text = dgCustomers.Rows[e].Cells[4].Value.ToString();
+            cmbcity.Text = dgCustomers.Rows[e].Cells[12].Value.ToString();
             cmbstate.Text = dgCustomers.Rows[e].Cells[3].Value.ToString();
             cmbcountry.Text = dgCustomers.Rows[e].Cells[2].Value.ToString();
             cmbpostalcode.Text = dgCustomers.Rows[e].Cells[9].Value.ToString();
         }
-
-
-
 
         private void EnableControls(bool val)
         {
@@ -230,7 +233,6 @@ namespace ProjectClassicModels
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
 
 
@@ -327,12 +329,13 @@ namespace ProjectClassicModels
         public void NewCustomers()
         {
             txtCustomerNumber.Text = "";
+            txtcustName.Text = "";
             txtlastName.Text = "";
             txtfirstName.Text = "";
             txtcontactNumber.Text = "";
             txtaddressline.Text = "";
             txtaddressline2.Text = "";
-            salesNo.Text = "";
+            salesRep.Text = "";
             credit.Text = "";
             cmbcity.Text = "";
             cmbstate.Text = "";
@@ -346,11 +349,18 @@ namespace ProjectClassicModels
         private void edtBtn_Click(object sender, EventArgs e)
         {
             EnableControls(true);
+            newOrEdit = true;
         }
 
         private void dltBtn_Click(object sender, EventArgs e)
         {
             EnableControls(false);
+            cm.DeleteCustomer(txtCustomerNumber);
+            cm.SelectCustomers(dgCustomers);
+            cm.BindCustomerCountry(cmbcountry);
+            cm.BindCustomerState(cmbstate, cmbcountry);
+            cm.BindCustomerCity(cmbcity, cmbcountry);
+            BindCustomers(1);
         }
 
         private void cnlBtn_Click(object sender, EventArgs e)
@@ -363,6 +373,7 @@ namespace ProjectClassicModels
             EnableControls(true);
             dltBtn.Enabled = false;
             NewCustomers();
+            newOrEdit = false;
         }
 
         private void cnfrmBtn_Click(object sender, EventArgs e)
@@ -372,21 +383,114 @@ namespace ProjectClassicModels
             if (newOrEdit == false)
             {
                 cm.InsertNewCustomer(txtCustomerNumber, txtlastName, txtfirstName, txtcontactNumber, txtaddressline, txtaddressline2, cmbcountry, cmbstate, cmbcity
-                    , cmbpostalcode, salesNo, credit);
+                    , cmbpostalcode, salesRep, credit, txtcustName);
+                cm.SelectCustomers(dgCustomers);
+                BindCustomers(dgCustomers.Rows.Count - 2);
             }
 
             else if (newOrEdit == true)
             {
-                //cm.EditCustomer();
+                cm.UpdateCustomer(txtCustomerNumber, txtlastName, txtfirstName, txtcontactNumber, txtaddressline, txtaddressline2, cmbcountry, cmbstate, cmbcity
+                    , cmbpostalcode, salesRep, credit, txtcustName);
+                cm.SelectCustomers(dgCustomers);
+                for (int n = 0; n < dgCustomers.Rows.Count; n++)
+                {
+                    if (txtCustomerNumber.Text == dgCustomers.Rows[n].Cells[0].Value.ToString())
+                    {
+                        FirstPrevNextLast(n);
+                        break;
+                    }
+                }
             }
 
         }
 
         private void prevBtn_Click(object sender, EventArgs e)
         {
+            for (int n = 0; n < dgCustomers.Rows.Count; n++)
+            {
+                if (txtCustomerNumber.Text == dgCustomers.Rows[n].Cells[0].Value.ToString())
+                {
+                    FirstPrevNextLast(n-1);
+                    break;
+                }
+            }
+
+            if (txtCustomerNumber.Text == dgCustomers.Rows[0].Cells[0].Value.ToString())
+            {
+                prevBtn.Enabled = false;
+                frstBtn.Enabled = false;
+            }
+            else 
+            {
+                lstBtn.Enabled = true;
+                nxtBtn.Enabled = true;
+                frstBtn.Enabled = true;
+                prevBtn.Enabled = true;
+            }
+            
+        }
+
+        private void nxtBtn_Click(object sender, EventArgs e)
+        {
+            for (int n = 0; n < dgCustomers.Rows.Count; n++)
+            {
+                if (txtCustomerNumber.Text == dgCustomers.Rows[n].Cells[0].Value.ToString())
+                {
+                    FirstPrevNextLast(n + 1);
+                    break;
+                }
+            }
+            if (txtCustomerNumber.Text == dgCustomers.Rows[dgCustomers.Rows.Count - 2].Cells[0].Value.ToString())
+            {
+                lstBtn.Enabled = false;
+                nxtBtn.Enabled = false;
+            }
+            else {
+
+                lstBtn.Enabled = true;
+                nxtBtn.Enabled = true;
+                frstBtn.Enabled = true;
+                prevBtn.Enabled = true;
+            }
+        }
+
+        private void frstBtn_Click(object sender, EventArgs e)
+        {
+            FirstPrevNextLast(0);
+            frstBtn.Enabled = false;
+            prevBtn.Enabled = false;
+            lstBtn.Enabled = true;
+            nxtBtn.Enabled = true;
+        }
+
+        private void lstBtn_Click(object sender, EventArgs e)
+        {
+            FirstPrevNextLast(dgCustomers.Rows.Count - 2);
+            lstBtn.Enabled = false;
+            nxtBtn.Enabled = false;
+            frstBtn.Enabled = true;
+            prevBtn.Enabled = true;
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
 
         }
 
+        private void cmbcity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void cmbpostalcode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label13_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
