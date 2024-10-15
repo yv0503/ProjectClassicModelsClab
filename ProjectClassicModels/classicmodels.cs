@@ -18,7 +18,7 @@ namespace ProjectClassicModels
         private DataTable dt = new DataTable();
         private MySqlDataReader MySqlDataReader = null;
 
-        private string connstring = @"server=localhost;userid=root;password=Cake!070503;database=classicmodels";
+        private string connstring = @"server=localhost;userid=root;password=123456;database=classicmodels";
 
         public bool Authentication(string username, string password)
         {
