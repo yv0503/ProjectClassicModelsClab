@@ -183,7 +183,7 @@ namespace ProjectClassicModels
             }
         }
 
-        public void BindCustomerState(ComboBox cb)
+        public void BindCustomerState(ComboBox cb, ComboBox cmbcountry)
         {
             try
             {
@@ -215,7 +215,7 @@ namespace ProjectClassicModels
             }
         }
 
-        public void BindCustomerCity(ComboBox cb)
+        public void BindCustomerCity(ComboBox cb, ComboBox cmbcountry)
         {
             try
             {
@@ -248,7 +248,7 @@ namespace ProjectClassicModels
         }
 
 
-        public void BindPostalCode(ComboBox cb)
+        public void BindPostalCode(ComboBox cb, ComboBox cmbcountry)
         {
             try
             {
@@ -271,6 +271,38 @@ namespace ProjectClassicModels
                         cb.DataSource = dt;
                         cb.DisplayMember = "postalCode";
                         cb.ValueMember = "postalCode";
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+        }
+
+        public void BindSalesRep(ComboBox cb)
+        {
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+                        string query = "SELECT Distinct salesRepEmployeeNumber AS salesRep FROM customers ORDER BY salesRep ASC";
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
+
+                        DataSet ds = new DataSet();
+
+                        da.Fill(ds, "0");
+                        dt = ds.Tables["0"];
+
+                        cb.DataSource = dt;
+                        cb.DisplayMember = "salesRep";
+                        cb.ValueMember = "salesRep";
                     }
                 }
             }
@@ -312,7 +344,7 @@ namespace ProjectClassicModels
         }
 
         public void InsertNewCustomer(TextBox CustNo, TextBox CustLstName, TextBox CustFrstName, TextBox ContactNo, TextBox AddressLine1, TextBox AddressLine2,
-            ComboBox cmbcountry, ComboBox cmbstate, ComboBox cmbcity, ComboBox cmbpostalcode, TextBox salesrep, TextBox credit)
+            ComboBox cmbcountry, ComboBox cmbstate, ComboBox cmbcity, ComboBox cmbpostalcode, ComboBox salesrep, TextBox credit, TextBox custName)
         {
             string a = CustNo.Text.Trim();
             string b = CustLstName.Text.Trim();
@@ -326,7 +358,7 @@ namespace ProjectClassicModels
             string j = cmbstate.Text.Trim();
             string k = salesrep.Text.Trim();
             string l = credit.Text.Trim(); 
-            string m = c + "  " + b;
+            string m = custName.Text.Trim();
 
             try
             {
@@ -389,7 +421,7 @@ namespace ProjectClassicModels
         }
 
         public void UpdateCustomer(TextBox CustNo, TextBox CustLstName, TextBox CustFrstName, TextBox ContactNo, TextBox AddressLine1, TextBox AddressLine2,
-            ComboBox cmbcountry, ComboBox cmbstate, ComboBox cmbcity, ComboBox cmbpostalcode, TextBox salesrep, TextBox credit)
+            ComboBox cmbcountry, ComboBox cmbstate, ComboBox cmbcity, ComboBox cmbpostalcode, ComboBox salesrep, TextBox credit, TextBox custName)
         {
             string a = CustNo.Text.Trim();
             string b = CustLstName.Text.Trim();
@@ -403,7 +435,7 @@ namespace ProjectClassicModels
             string j = cmbstate.Text.Trim();
             string k = salesrep.Text.Trim();
             string l = credit.Text.Trim();
-            string m = c + "  " + b;
+            string m = custName.Text.Trim();
 
             try
             {

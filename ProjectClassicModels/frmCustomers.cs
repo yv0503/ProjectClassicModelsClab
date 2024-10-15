@@ -31,8 +31,10 @@ namespace ProjectClassicModels
         {
             cm.SelectCustomers(dgCustomers);
             cm.BindCustomerCountry(cmbcountry);
-            cm.BindCustomerState(cmbstate);
-            cm.BindCustomerCity(cmbcity);
+            cm.BindCustomerState(cmbstate, cmbcountry);
+            cm.BindCustomerCity(cmbcity, cmbcountry);
+            cm.BindPostalCode(cmbpostalcode, cmbcountry);
+            cm.BindSalesRep(salesRep);
             BindCustomers(1);
 
  
@@ -41,6 +43,7 @@ namespace ProjectClassicModels
         private void BindCustomers(int e)
         {
             txtCustomerNumber.Text = dgCustomers.Rows[e].Cells[0].Value.ToString();
+            txtcustName.Text = dgCustomers.Rows[e].Cells[1].Value.ToString();
             txtlastName.Text = dgCustomers.Rows[e].Cells[4].Value.ToString();
             txtfirstName.Text = dgCustomers.Rows[e].Cells[5].Value.ToString();
             txtcontactNumber.Text = dgCustomers.Rows[e].Cells[6].Value.ToString();
@@ -51,9 +54,9 @@ namespace ProjectClassicModels
 
 
             cm.BindCustomerCountry(cmbcountry);
-            cm.BindCustomerState(cmbstate);
-            cm.BindCustomerCity(cmbcity);
-            cm.BindPostalCode(cmbpostalcode);
+            cm.BindCustomerState(cmbstate, cmbcountry);
+            cm.BindCustomerCity(cmbcity, cmbcountry);
+            cm.BindPostalCode(cmbpostalcode, cmbcountry);
 
             SelectedCity(cmbcity, dgCustomers.Rows[e].Cells[12].Value.ToString());
             SelectedState(cmbstate, dgCustomers.Rows[e].Cells[3].Value.ToString());
@@ -65,6 +68,7 @@ namespace ProjectClassicModels
         private void FirstPrevNextLast(int e)
         {
             txtCustomerNumber.Text = dgCustomers.Rows[e].Cells[0].Value.ToString();
+            txtcustName.Text = dgCustomers.Rows[e].Cells[1].Value.ToString();
             txtlastName.Text = dgCustomers.Rows[e].Cells[4].Value.ToString();
             txtfirstName.Text = dgCustomers.Rows[e].Cells[5].Value.ToString();
             txtcontactNumber.Text = dgCustomers.Rows[e].Cells[6].Value.ToString();
@@ -229,7 +233,6 @@ namespace ProjectClassicModels
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
 
 
@@ -326,6 +329,7 @@ namespace ProjectClassicModels
         public void NewCustomers()
         {
             txtCustomerNumber.Text = "";
+            txtcustName.Text = "";
             txtlastName.Text = "";
             txtfirstName.Text = "";
             txtcontactNumber.Text = "";
@@ -354,8 +358,8 @@ namespace ProjectClassicModels
             cm.DeleteCustomer(txtCustomerNumber);
             cm.SelectCustomers(dgCustomers);
             cm.BindCustomerCountry(cmbcountry);
-            cm.BindCustomerState(cmbstate);
-            cm.BindCustomerCity(cmbcity);
+            cm.BindCustomerState(cmbstate, cmbcountry);
+            cm.BindCustomerCity(cmbcity, cmbcountry);
             BindCustomers(1);
         }
 
@@ -379,7 +383,7 @@ namespace ProjectClassicModels
             if (newOrEdit == false)
             {
                 cm.InsertNewCustomer(txtCustomerNumber, txtlastName, txtfirstName, txtcontactNumber, txtaddressline, txtaddressline2, cmbcountry, cmbstate, cmbcity
-                    , cmbpostalcode, salesRep, credit);
+                    , cmbpostalcode, salesRep, credit, txtcustName);
                 cm.SelectCustomers(dgCustomers);
                 BindCustomers(dgCustomers.Rows.Count - 2);
             }
@@ -387,7 +391,7 @@ namespace ProjectClassicModels
             else if (newOrEdit == true)
             {
                 cm.UpdateCustomer(txtCustomerNumber, txtlastName, txtfirstName, txtcontactNumber, txtaddressline, txtaddressline2, cmbcountry, cmbstate, cmbcity
-                    , cmbpostalcode, salesRep, credit);
+                    , cmbpostalcode, salesRep, credit, txtcustName);
                 cm.SelectCustomers(dgCustomers);
                 for (int n = 0; n < dgCustomers.Rows.Count; n++)
                 {
@@ -453,7 +457,7 @@ namespace ProjectClassicModels
 
         private void frstBtn_Click(object sender, EventArgs e)
         {
-            FirstPrevNextLast(1);
+            FirstPrevNextLast(0);
             frstBtn.Enabled = false;
             prevBtn.Enabled = false;
             lstBtn.Enabled = true;
@@ -470,6 +474,20 @@ namespace ProjectClassicModels
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbcity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void cmbpostalcode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label13_Click(object sender, EventArgs e)
         {
 
         }
