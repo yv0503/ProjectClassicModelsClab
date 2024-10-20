@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Activation;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,10 +17,16 @@ namespace ProjectClassicModels
         ClassicModels cm = new ClassicModels();
         bool newOrEdit;
 
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidthEllipse, int nHeightEllipse
+               );
 
         public frmCustomers()
         {
             InitializeComponent();
+
+            this.FormBorderStyle = FormBorderStyle.None;
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -28,16 +35,16 @@ namespace ProjectClassicModels
         }
 
         private void customers_Load(object sender, EventArgs e)
-        {
+        { 
             cm.SelectCustomers(dgCustomers);
+            FirstPrevNextLast(0);
             cm.BindCustomerCountry(cmbcountry);
+            FirstPrevNextLast(0);
             cm.BindCustomerState(cmbstate, cmbcountry);
             cm.BindCustomerCity(cmbcity, cmbcountry);
             cm.BindPostalCode(cmbpostalcode, cmbcountry);
             cm.BindSalesRep(salesRep);
-            BindCustomers(1);
-
- 
+            FirstPrevNextLast(0);
         }
 
         private void BindCustomers(int e)
@@ -326,6 +333,7 @@ namespace ProjectClassicModels
             }
         }
 
+
         public void NewCustomers()
         {
             txtCustomerNumber.Text = "";
@@ -490,6 +498,286 @@ namespace ProjectClassicModels
         private void label13_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void label6_Click_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCustomerNumber_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frstBtn_Click_1(object sender, EventArgs e)
+        {
+
+            FirstPrevNextLast(0);
+            cm.BindCustomerState(cmbstate, cmbcountry);
+            cm.BindCustomerCity(cmbcity, cmbcountry);
+            cm.BindPostalCode(cmbpostalcode, cmbcountry);
+            FirstPrevNextLast(0);
+            frstBtn.Enabled = false;
+            prevBtn.Enabled = false;
+            lstBtn.Enabled = true;
+            nxtBtn.Enabled = true;
+        }
+
+        private void prevBtn_Click_1(object sender, EventArgs e)
+        {
+            for (int n = 0; n < dgCustomers.Rows.Count; n++)
+            {
+                if (txtCustomerNumber.Text == dgCustomers.Rows[n].Cells[0].Value.ToString())
+                {
+
+                    FirstPrevNextLast(n - 1);
+                    cm.BindCustomerState(cmbstate, cmbcountry);
+                    cm.BindCustomerCity(cmbcity, cmbcountry);
+                    cm.BindPostalCode(cmbpostalcode, cmbcountry);
+                    FirstPrevNextLast(n - 1);
+                    break;
+                }
+            }
+
+            if (txtCustomerNumber.Text == dgCustomers.Rows[0].Cells[0].Value.ToString())
+            {
+                prevBtn.Enabled = false;
+                frstBtn.Enabled = false;
+            }
+            else
+            {
+                lstBtn.Enabled = true;
+                nxtBtn.Enabled = true;
+                frstBtn.Enabled = true;
+                prevBtn.Enabled = true;
+            }
+
+        }
+
+        private void nxtBtn_Click_1(object sender, EventArgs e)
+        {
+
+
+            for (int n = 0; n < dgCustomers.Rows.Count; n++)
+            {
+                if (txtCustomerNumber.Text == dgCustomers.Rows[n].Cells[0].Value.ToString())
+                {
+                    FirstPrevNextLast(n + 1);
+                    cm.BindCustomerState(cmbstate, cmbcountry);
+                    cm.BindCustomerCity(cmbcity, cmbcountry);
+                    cm.BindPostalCode(cmbpostalcode, cmbcountry);
+                    FirstPrevNextLast(n + 1);
+                    break;
+                }
+            }
+            if (txtCustomerNumber.Text == dgCustomers.Rows[dgCustomers.Rows.Count - 1].Cells[0].Value.ToString())
+            {
+                lstBtn.Enabled = false;
+                nxtBtn.Enabled = false;
+            }
+            else
+            {
+
+                lstBtn.Enabled = true;
+                nxtBtn.Enabled = true;
+                frstBtn.Enabled = true;
+                prevBtn.Enabled = true;
+            } 
+       
+        }
+
+        private void lstBtn_Click_1(object sender, EventArgs e)
+        {
+            
+            FirstPrevNextLast(dgCustomers.Rows.Count - 1);
+            cm.BindCustomerState(cmbstate, cmbcountry);
+            cm.BindCustomerCity(cmbcity, cmbcountry);
+            cm.BindPostalCode(cmbpostalcode, cmbcountry);
+            FirstPrevNextLast(dgCustomers.Rows.Count - 1);
+            lstBtn.Enabled = false;
+            nxtBtn.Enabled = false;
+            frstBtn.Enabled = true;
+            prevBtn.Enabled = true;
+
+        }
+
+        private void newBtn_Click_1(object sender, EventArgs e)
+        {
+            EnableControls(true);
+            dltBtn.Enabled = false;
+            NewCustomers();
+            newOrEdit = false;
+        }
+
+        private void dltBtn_Click_1(object sender, EventArgs e)
+        {
+            EnableControls(false);
+            cm.DeleteCustomer(txtCustomerNumber);
+            cm.SelectCustomers(dgCustomers);
+            cm.BindCustomerCountry(cmbcountry);
+            cm.BindCustomerState(cmbstate, cmbcountry);
+            cm.BindCustomerCity(cmbcity, cmbcountry);
+            BindCustomers(1);
+        }
+
+        private void edtBtn_Click_1(object sender, EventArgs e)
+        {
+            EnableControls(true);
+            newOrEdit = true;
+        }
+
+        private void cnlBtn_Click_1(object sender, EventArgs e)
+        {
+            EnableControls(false);
+            cm.SelectCustomers(dgCustomers);
+            
+            for (int n = 0; n < dgCustomers.Rows.Count; n++)
+            {
+                if (txtCustomerNumber.Text == dgCustomers.Rows[n].Cells[0].Value.ToString())
+                {
+                    FirstPrevNextLast(n);
+                    cm.BindCustomerState(cmbstate, cmbcountry);
+                    cm.BindCustomerCity(cmbcity, cmbcountry);
+                    cm.BindPostalCode(cmbpostalcode, cmbcountry);
+                    FirstPrevNextLast(n);
+                    cmbcountry.Enabled = false;
+                    cmbcity.Enabled = false;
+                    cmbstate.Enabled = false;
+                    cmbpostalcode.Enabled = false;
+                    break;
+                }
+            }
+            if (txtCustomerNumber.Text == dgCustomers.Rows[dgCustomers.Rows.Count - 1].Cells[0].Value.ToString())
+            {
+                lstBtn.Enabled = false;
+                nxtBtn.Enabled = false;
+            }
+            else
+            {
+
+                lstBtn.Enabled = true;
+                nxtBtn.Enabled = true;
+                frstBtn.Enabled = true;
+                prevBtn.Enabled = true;
+            }
+
+        }
+
+
+
+        private void cnfrmBtn_Click_1(object sender, EventArgs e)
+        {
+            EnableControls(false);
+
+            if (newOrEdit == false)
+            {
+                cm.InsertNewCustomer(txtCustomerNumber, txtlastName, txtfirstName, txtcontactNumber, txtaddressline, txtaddressline2, cmbcountry, cmbstate, cmbcity
+                    , cmbpostalcode, salesRep, credit, txtcustName);
+                cm.SelectCustomers(dgCustomers);
+                BindCustomers(dgCustomers.Rows.Count - 2);
+            }
+
+            else if (newOrEdit == true)
+            {
+                cm.UpdateCustomer(txtCustomerNumber, txtlastName, txtfirstName, txtcontactNumber, txtaddressline, txtaddressline2, cmbcountry, cmbstate, cmbcity
+                    , cmbpostalcode, salesRep, credit, txtcustName);
+                cm.SelectCustomers(dgCustomers);
+                for (int n = 0; n < dgCustomers.Rows.Count; n++)
+                {
+                    if (txtCustomerNumber.Text == dgCustomers.Rows[n].Cells[0].Value.ToString())
+                    {
+                        FirstPrevNextLast(n);
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void dgCustomers_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgCustomers_CellContentDoubleClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            customerTab.SelectedIndex = 0;
+            BindCustomers(e.RowIndex);
+            EnableControls(false);
+
+            if (txtCustomerNumber.Text == dgCustomers.Rows[dgCustomers.Rows.Count - 1].Cells[0].Value.ToString())
+            {
+                lstBtn.Enabled = false;
+                nxtBtn.Enabled = false;
+            }
+
+            if (txtCustomerNumber.Text == dgCustomers.Rows[0].Cells[0].Value.ToString())
+            {
+                prevBtn.Enabled = false;
+                frstBtn.Enabled = false;
+            }
+        }
+
+        private void cmbcountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void customerTab_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            int monitorWidth = Screen.PrimaryScreen.Bounds.Width;
+
+            TabPage selectedTab = customerTab.SelectedTab;
+
+            if (customerTab.SelectedIndex == 1)
+            {
+                this.WindowState = FormWindowState.Maximized;
+                this.FormBorderStyle = FormBorderStyle.None;
+                Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+            }
+
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.FormBorderStyle = FormBorderStyle.None;
+                Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+            }
+        }
+
+        private void exitbtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void exitBtn_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void cmbstate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void cmbcity_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+        }
+
+        private void cmbpostalcode_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+        }
+
+        private void cmbcountry_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void cmbpostalcode_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void cmbcountry_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            cm.BindCustomerState(cmbstate, cmbcountry);
+            cm.BindCustomerCity(cmbcity, cmbcountry);
+            cm.BindPostalCode(cmbpostalcode, cmbcountry);
         }
     }
 

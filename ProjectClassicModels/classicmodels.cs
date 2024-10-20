@@ -194,7 +194,7 @@ namespace ProjectClassicModels
                     myConn.Open();
                     if (myConn.State == ConnectionState.Open)
                     {
-                        string query = "SELECT Distinct state AS State FROM customers ORDER BY State ASC";
+                        string query = "SELECT Distinct state AS State FROM customers WHERE country = '"+cmbcountry.Text+"' ORDER BY State ASC";
 
                         MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
 
@@ -226,7 +226,7 @@ namespace ProjectClassicModels
                     myConn.Open();
                     if (myConn.State == ConnectionState.Open)
                     {
-                        string query = "SELECT Distinct city AS City FROM customers ORDER BY City ASC";
+                        string query = "SELECT Distinct city AS City FROM customers WHERE country = '"+cmbcountry.Text+"' ORDER BY City ASC";
 
                         MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
 
@@ -259,18 +259,23 @@ namespace ProjectClassicModels
                     myConn.Open();
                     if (myConn.State == ConnectionState.Open)
                     {
-                        string query = "SELECT Distinct postalCode AS postalCode FROM customers ORDER BY postalCode ASC";
+                        
+                        {
+                            string query = "SELECT Distinct postalCode AS postalCode FROM customers WHERE country = '"+cmbcountry.Text+"' ORDER BY postalCode ASC";
 
-                        MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
 
-                        DataSet ds = new DataSet();
+                            MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
 
-                        da.Fill(ds, "0");
-                        dt = ds.Tables["0"];
+                            DataSet ds = new DataSet();
 
-                        cb.DataSource = dt;
-                        cb.DisplayMember = "postalCode";
-                        cb.ValueMember = "postalCode";
+                            da.Fill(ds, "0");
+                            dt = ds.Tables["0"];
+
+                            cb.DataSource = dt;
+                            cb.DisplayMember = "postalCode";
+                            cb.ValueMember = "postalCode";
+                        
+                        }
                     }
                 }
             }
@@ -312,7 +317,7 @@ namespace ProjectClassicModels
             }
         }
 
-        public void NewCustNumber(TextBox tb)
+        public void NewCustNumber(ReaLTaiizor.Controls.DungeonTextBox tb)
         {
             try
             {
@@ -343,8 +348,9 @@ namespace ProjectClassicModels
             }
         }
 
-        public void InsertNewCustomer(TextBox CustNo, TextBox CustLstName, TextBox CustFrstName, TextBox ContactNo, TextBox AddressLine1, TextBox AddressLine2,
-            ComboBox cmbcountry, ComboBox cmbstate, ComboBox cmbcity, ComboBox cmbpostalcode, ComboBox salesrep, TextBox credit, TextBox custName)
+        public void InsertNewCustomer(ReaLTaiizor.Controls.DungeonTextBox CustNo, ReaLTaiizor.Controls.DungeonTextBox CustLstName, ReaLTaiizor.Controls.DungeonTextBox CustFrstName,
+            ReaLTaiizor.Controls.DungeonTextBox ContactNo, ReaLTaiizor.Controls.DungeonTextBox AddressLine1, ReaLTaiizor.Controls.DungeonTextBox AddressLine2,
+            ComboBox cmbcountry, ComboBox cmbstate, ComboBox cmbcity, ComboBox cmbpostalcode, ComboBox salesrep, ReaLTaiizor.Controls.DungeonTextBox credit, ReaLTaiizor.Controls.DungeonTextBox custName)
         {
             string a = CustNo.Text.Trim();
             string b = CustLstName.Text.Trim();
@@ -393,7 +399,7 @@ namespace ProjectClassicModels
         }
 
 
-        public void DeleteCustomer(TextBox CustNo)
+        public void DeleteCustomer(ReaLTaiizor.Controls.DungeonTextBox CustNo)
         {
 
             try
@@ -420,8 +426,9 @@ namespace ProjectClassicModels
 
         }
 
-        public void UpdateCustomer(TextBox CustNo, TextBox CustLstName, TextBox CustFrstName, TextBox ContactNo, TextBox AddressLine1, TextBox AddressLine2,
-            ComboBox cmbcountry, ComboBox cmbstate, ComboBox cmbcity, ComboBox cmbpostalcode, ComboBox salesrep, TextBox credit, TextBox custName)
+        public void UpdateCustomer(ReaLTaiizor.Controls.DungeonTextBox CustNo, ReaLTaiizor.Controls.DungeonTextBox CustLstName, ReaLTaiizor.Controls.DungeonTextBox CustFrstName,
+            ReaLTaiizor.Controls.DungeonTextBox ContactNo, ReaLTaiizor.Controls.DungeonTextBox AddressLine1, ReaLTaiizor.Controls.DungeonTextBox AddressLine2,
+            ComboBox cmbcountry, ComboBox cmbstate, ComboBox cmbcity, ComboBox cmbpostalcode, ComboBox salesrep, ReaLTaiizor.Controls.DungeonTextBox credit, ReaLTaiizor.Controls.DungeonTextBox custName)
         {
             string a = CustNo.Text.Trim();
             string b = CustLstName.Text.Trim();
@@ -447,7 +454,9 @@ namespace ProjectClassicModels
                     if (myConn.State == ConnectionState.Open)
                     {
 
-                        MySqlCommand cmd = new MySqlCommand("UPDATE customers SET customerName='"+m+"', contactLastName='"+b+"'," + "contactFirstName='"+c+"', phone='"+d+"', addressLine1='"+e+"', addressLine2='"+f+"', city='"+h+"', state='"+j+"'," + " postalCode='"+i+"', country='"+g+"', salesRepEmployeeNumber='"+k+"', creditLimit='"+l+"' WHERE customerNumber="+a+"", myConn);
+                        MySqlCommand cmd = new MySqlCommand("UPDATE customers SET customerName='"+m+"', contactLastName='"+b+"'," + "contactFirstName='"+c+"', phone='"+d+"', " +
+                            "addressLine1='"+e+"', addressLine2='"+f+"', city='"+h+"', state='"+j+"'," + " postalCode='"+i+"', country='"+g+"', salesRepEmployeeNumber='"+k+"', " +
+                            "creditLimit='"+l+"' WHERE customerNumber="+a+"", myConn);
 
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Customer Updated");
@@ -458,6 +467,325 @@ namespace ProjectClassicModels
             {
                 MessageBox.Show("Error message is: " + e1.Message);
             }
+        }
+
+
+        //EMPLOYEES//
+
+
+        public void SelectEmployee(DataGridView dgEmployee)
+        {
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+                        string query = "SELECT employeeNumber AS 'Employee Number', lastName AS 'Last Name', " +
+                            "firstName AS 'First Name', extension as 'Extension', email as 'Email Address', officeCode as 'Office Code', reportsTo as 'Reports To', " +
+                            "jobTitle as 'Job Title' FROM employees";
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
+
+                        DataSet ds = new DataSet();
+
+                        da.Fill(ds, "employees");
+                        dt = ds.Tables["employees"];
+
+
+
+                        dgEmployee.DataSource = dt;
+                        dgEmployee.Columns[0].Width = 200;
+                        dgEmployee.Columns[1].Width = 200;
+                        dgEmployee.Columns[2].Width = 200;
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+            //totalRows = dt.Rows.Count - 1;
+            //EnabledCustomerForm("000000");
+            //ClearForms();
+            //EnabledButton("1000001");
+            //EnabledNavButtons("1110");
+        }
+
+
+
+        public void BindOfficeCode(ComboBox cb)
+        {
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+
+                        {
+                            string query = "SELECT Distinct officeCode AS OfficeCode FROM employees";
+
+
+                            MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
+
+                            DataSet ds = new DataSet();
+
+                            da.Fill(ds, "0");
+                            dt = ds.Tables["0"];
+
+                            cb.DataSource = dt;
+                            cb.DisplayMember = "OfficeCode";
+                            cb.ValueMember = "OfficeCode";
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+        }
+
+        public void BindExtension(ComboBox cb)
+        {
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+
+                        {
+                            string query = "SELECT Distinct extension AS extension FROM employees ORDER BY extension ASC";
+
+
+                            MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
+
+                            DataSet ds = new DataSet();
+
+                            da.Fill(ds, "0");
+                            dt = ds.Tables["0"];
+
+                            cb.DataSource = dt;
+                            cb.DisplayMember = "extension";
+                            cb.ValueMember = "extension";
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+        }
+
+        public void BindReportsTo(ComboBox cb)
+        {
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+
+                        {
+                            string query = "SELECT Distinct reportsTo AS reportsTo FROM employees ORDER BY reportsTo ASC";
+
+
+                            MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
+
+                            DataSet ds = new DataSet();
+
+                            da.Fill(ds, "0");
+                            dt = ds.Tables["0"];
+
+                            cb.DataSource = dt;
+                            cb.DisplayMember = "reportsTo";
+                            cb.ValueMember = "reportsTo";
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+        }
+
+        public void BindJobTitle(ComboBox cb)
+        {
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+
+                        {
+                            string query = "SELECT Distinct jobTitle AS jobTitle FROM employees ORDER BY jobTitle ASC";
+
+
+                            MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
+
+                            DataSet ds = new DataSet();
+
+                            da.Fill(ds, "0");
+                            dt = ds.Tables["0"];
+
+                            cb.DataSource = dt;
+                            cb.DisplayMember = "jobTitle";
+                            cb.ValueMember = "jobTitle";
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+        }
+
+        public void NewEmpNumber(ReaLTaiizor.Controls.DungeonTextBox tb)
+        {
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+                        string query = "SELECT MAX(employeeNumber) +1 AS newEmployeeNumber FROM employees";
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
+
+                        DataSet ds = new DataSet();
+
+                        da.Fill(ds, "0");
+                        dt = ds.Tables["0"];
+
+                        tb.Text = dt.Rows[0][0].ToString();
+
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+        }
+
+        public void UpdateEmployee(ReaLTaiizor.Controls.DungeonTextBox EmpNo, ReaLTaiizor.Controls.DungeonTextBox EmpLastName, ReaLTaiizor.Controls.DungeonTextBox EmpFirstName,
+                                    ReaLTaiizor.Controls.DungeonTextBox Email, ComboBox cmbExtension, ComboBox cmbOfficeCode, ComboBox cmbReportsTo, ComboBox cmbJobTitle)
+        {
+
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+
+                        MySqlCommand cmd = new MySqlCommand("UPDATE employees SET lastName='" + EmpLastName.Text + "', firstName='" + EmpFirstName.Text + "'," + "extension='" + cmbExtension.Text + "', email='" + Email.Text + "', " +
+                            "officeCode='" + cmbOfficeCode.Text + "', reportsTo='" + cmbReportsTo.Text + "', jobTitle='" + cmbJobTitle.Text + "' WHERE employeeNumber="+EmpNo.Text+"", myConn);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Employee Updated");
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+        }
+
+        public void InsertNewEmployee(ReaLTaiizor.Controls.DungeonTextBox EmpNo, ReaLTaiizor.Controls.DungeonTextBox EmpLastName, ReaLTaiizor.Controls.DungeonTextBox EmpFirstName,
+                                    ReaLTaiizor.Controls.DungeonTextBox Email,ComboBox cmbExtension, ComboBox cmbOfficeCode, ComboBox cmbReportsTo, ComboBox cmbJobTitle)
+        {
+
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+                        //string query = "INSERT INTO customers(customerNumber, customerName, contactLastName, " +
+                        //    "contactFirstName, phone, addressLine1, addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit)" +
+                        //    "VALUES("+a+", "+m+", "+b+","+c+", "+d+","+e+", "+f+","+g+", "+h+","+i+", "+j+","+k+", "+l+")";
+
+                        //MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
+
+                        MySqlCommand cmd = new MySqlCommand("INSERT INTO customers(employeeNumber, lastName, firstName, " +
+                            "extension, email, officeCode, reportsTo, jobTitle) " +
+                           "VALUES(" + "'" + EmpNo.Text + "'" + ", " + "'" + EmpLastName.Text + "'" + ", " + "'" + EmpFirstName.Text + "'" + ", " + "'" + cmbExtension.Text + "'" 
+                           + ", " + "'" + Email.Text + "'" + ", " + "'" + cmbOfficeCode.Text + "'" + ", " + "'" + cmbReportsTo.Text + "'"
+                           + ", " + "'" + cmbJobTitle.Text + ")", myConn);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Employee Inputted");
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+        }
+
+
+        public void DeleteEmployee(ReaLTaiizor.Controls.DungeonTextBox EmpNo)
+        {
+
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+
+                        MySqlCommand cmd = new MySqlCommand("DELETE FROM employee WHERE employeeNumber='" + EmpNo.Text + "'", myConn);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Employee Deleted");
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+
         }
     }
     }

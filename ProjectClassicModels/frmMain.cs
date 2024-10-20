@@ -46,6 +46,14 @@ namespace ProjectClassicModels
         private void custTab_Click(object sender, EventArgs e)
         {
             Form childForm = new frmCustomers();
+            childForm.MdiParent = this;
+            childForm.Show();
+        }
+
+        private void empTab_Click(object sender, EventArgs e)
+        {
+            Form childForm = new frmEmployee();
+            childForm.MdiParent = this;
             childForm.Show();
         }
     }

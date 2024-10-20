@@ -40,6 +40,10 @@
             this.materialDivider1 = new ReaLTaiizor.Controls.MaterialDivider();
             this.SuspendLayout();
             // 
+            // fontDialog1
+            // 
+            this.fontDialog1.Apply += new System.EventHandler(this.fontDialog1_Apply);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -132,6 +136,7 @@
             this.btnOk.UseAccentColor = false;
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            this.btnOk.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnOk_MouseDown);
             // 
             // crownListView1
             // 
@@ -196,6 +201,8 @@
             this.Name = "frmLogin";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.frmLogin_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmLogin_KeyDown);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.frmLogin_MouseDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

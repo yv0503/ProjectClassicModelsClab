@@ -71,32 +71,33 @@
             // custTab
             // 
             this.custTab.Name = "custTab";
-            this.custTab.Size = new System.Drawing.Size(131, 22);
+            this.custTab.Size = new System.Drawing.Size(180, 22);
             this.custTab.Text = "Customers";
             this.custTab.Click += new System.EventHandler(this.custTab_Click);
             // 
             // empTab
             // 
             this.empTab.Name = "empTab";
-            this.empTab.Size = new System.Drawing.Size(131, 22);
+            this.empTab.Size = new System.Drawing.Size(180, 22);
             this.empTab.Text = "Employees";
+            this.empTab.Click += new System.EventHandler(this.empTab_Click);
             // 
             // offTab
             // 
             this.offTab.Name = "offTab";
-            this.offTab.Size = new System.Drawing.Size(131, 22);
+            this.offTab.Size = new System.Drawing.Size(180, 22);
             this.offTab.Text = "Offices";
             // 
             // ordersToolStripMenuItem
             // 
             this.ordersToolStripMenuItem.Name = "ordersToolStripMenuItem";
-            this.ordersToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.ordersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ordersToolStripMenuItem.Text = "Orders";
             // 
             // productsToolStripMenuItem
             // 
             this.productsToolStripMenuItem.Name = "productsToolStripMenuItem";
-            this.productsToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.productsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.productsToolStripMenuItem.Text = "Products";
             // 
             // transactionsToolStripMenuItem
