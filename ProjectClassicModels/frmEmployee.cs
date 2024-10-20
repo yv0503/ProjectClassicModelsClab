@@ -49,7 +49,6 @@ namespace ProjectClassicModels
             cm.BindReportsTo(cmbReportsTo);
             cm.BindJobTitle(cmbJobTitle);
 
-
             SelectedExtension(cmbExtension, dgEmployees.Rows[e].Cells[3].Value.ToString());
             SelectedOfficeCode(cmbOfficeCode, dgEmployees.Rows[e].Cells[5].Value.ToString());
             SelectedreportsTo(cmbReportsTo, dgEmployees.Rows[e].Cells[6].Value.ToString());

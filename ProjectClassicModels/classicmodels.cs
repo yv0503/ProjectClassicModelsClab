@@ -787,6 +787,359 @@ namespace ProjectClassicModels
             }
 
         }
+
+        //Office//
+
+        public void SelectOffice(DataGridView dgOffice)
+        {
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+                        string query = "SELECT officeCode AS 'Office Code', city AS 'City', " +
+                            "phone AS 'Phone', addressLine1 as 'Address Line 1', addressline2 as 'Address Line 2', state as 'State', " +
+                            "country as 'Country', " +
+                            "postalCode as 'Postal Code', territory as Territory FROM offices";
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
+
+                        DataSet ds = new DataSet();
+
+                        da.Fill(ds, "offices");
+                        dt = ds.Tables["offices"];
+
+
+
+                        dgOffice.DataSource = dt;
+                        dgOffice.Columns[0].Width = 200;
+                        dgOffice.Columns[1].Width = 200;
+                        dgOffice.Columns[2].Width = 200;
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+            //totalRows = dt.Rows.Count - 1;
+            //EnabledCustomerForm("000000");
+            //ClearForms();
+            //EnabledButton("1000001");
+            //EnabledNavButtons("1110");
+        }
+
+        public void BindCity2(ComboBox cb)
+        {
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+
+                        {
+                            string query = "SELECT Distinct city AS City FROM offices";
+
+
+                            MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
+
+                            DataSet ds = new DataSet();
+
+                            da.Fill(ds, "0");
+                            dt = ds.Tables["0"];
+
+                            cb.DataSource = dt;
+                            cb.DisplayMember = "City";
+                            cb.ValueMember = "City";
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+        }
+
+        public void BindState2(ComboBox cb)
+        {
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+
+                        {
+                            string query = "SELECT Distinct state AS State FROM offices";
+
+
+                            MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
+
+                            DataSet ds = new DataSet();
+
+                            da.Fill(ds, "0");
+                            dt = ds.Tables["0"];
+
+                            cb.DataSource = dt;
+                            cb.DisplayMember = "State";
+                            cb.ValueMember = "State";
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+        }
+
+        public void BindCountry2(ComboBox cb)
+        {
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+
+                        {
+                            string query = "SELECT Distinct country AS Country FROM offices";
+
+
+                            MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
+
+                            DataSet ds = new DataSet();
+
+                            da.Fill(ds, "0");
+                            dt = ds.Tables["0"];
+
+                            cb.DataSource = dt;
+                            cb.DisplayMember = "Country";
+                            cb.ValueMember = "Country";
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+        }
+
+        public void BindPostalCode2(ComboBox cb)
+        {
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+
+                        {
+                            string query = "SELECT Distinct postalCode AS PostalCode FROM offices";
+
+
+                            MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
+
+                            DataSet ds = new DataSet();
+
+                            da.Fill(ds, "0");
+                            dt = ds.Tables["0"];
+
+                            cb.DataSource = dt;
+                            cb.DisplayMember = "PostalCode";
+                            cb.ValueMember = "PostalCode";
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+        }
+
+        public void BindTerritory(ComboBox cb)
+        {
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+
+                        {
+                            string query = "SELECT Distinct territory AS Territory FROM offices";
+
+
+                            MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
+
+                            DataSet ds = new DataSet();
+
+                            da.Fill(ds, "0");
+                            dt = ds.Tables["0"];
+
+                            cb.DataSource = dt;
+                            cb.DisplayMember = "Territory";
+                            cb.ValueMember = "Territory";
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+        }
+
+        public void NewOfficeCode(ReaLTaiizor.Controls.DungeonTextBox tb)
+        {
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+                        string query = "SELECT MAX(officeCode) +1 AS newOfficeCode FROM offices";
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
+
+                        DataSet ds = new DataSet();
+
+                        da.Fill(ds, "0");
+                        dt = ds.Tables["0"];
+
+                        tb.Text = dt.Rows[0][0].ToString();
+
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+        }
+
+        public void UpdateOffice(ReaLTaiizor.Controls.DungeonTextBox officeCode, ReaLTaiizor.Controls.DungeonTextBox Phone, ReaLTaiizor.Controls.DungeonTextBox addressLine1,
+                                    ReaLTaiizor.Controls.DungeonTextBox addressLine2, ComboBox cmbcity, ComboBox cmbstate, ComboBox cmbcountry, ComboBox cmbpostalcode, ComboBox cmbterritory)
+        {
+
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+
+                        MySqlCommand cmd = new MySqlCommand("UPDATE offices SET phone='" + Phone.Text + "', city='" + cmbcity.Text + "'," + "addressLine1='" + addressLine1.Text + "', addressLine2='" + addressLine2.Text + "', " +
+                            "postalCode='" + cmbpostalcode.Text + "', state='" + cmbstate.Text + "', territory='" + cmbterritory.Text + "', country='"+cmbcountry+"' WHERE employeeNumber=" + officeCode.Text + "", myConn);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Employee Updated");
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+        }
+
+        public void InsertNewOffice(ReaLTaiizor.Controls.DungeonTextBox officeCode, ReaLTaiizor.Controls.DungeonTextBox Phone, ReaLTaiizor.Controls.DungeonTextBox addressLine1,
+                                    ReaLTaiizor.Controls.DungeonTextBox addressLine2, ComboBox cmbcity, ComboBox cmbstate, ComboBox cmbcountry, ComboBox cmbpostalcode, ComboBox cmbterritory)
+        {
+
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+                        //string query = "INSERT INTO customers(customerNumber, customerName, contactLastName, " +
+                        //    "contactFirstName, phone, addressLine1, addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit)" +
+                        //    "VALUES("+a+", "+m+", "+b+","+c+", "+d+","+e+", "+f+","+g+", "+h+","+i+", "+j+","+k+", "+l+")";
+
+                        //MySqlDataAdapter da = new MySqlDataAdapter(query, myConn);
+
+                        MySqlCommand cmd = new MySqlCommand("INSERT INTO offices(officeCode, city, phone, " +
+                            "addressLine1, addressLine2, state, country, postalCode, territory) " +
+                           "VALUES(" + "'" + officeCode.Text + "'" + ", " + "'" + cmbcity.Text + "'" + ", " + "'" + Phone.Text + "'" + ", " + "'" + addressLine1.Text + "'"
+                           + ", " + "'" + addressLine2.Text + "'" + ", " + "'" + cmbstate.Text + "'" + ", " + "'" + cmbcountry.Text + "'"
+                           + ", " + "'" + cmbpostalcode.Text + ", " + "'" + cmbpostalcode.Text + ")", myConn);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Employee Inputted");
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+        }
+
+
+        public void DeleteOffice(ReaLTaiizor.Controls.DungeonTextBox officeCode)
+        {
+
+            try
+            {
+                myConn = new MySqlConnection(connstring);
+
+                if (myConn.State != ConnectionState.Open)
+                {
+                    myConn.Open();
+                    if (myConn.State == ConnectionState.Open)
+                    {
+
+                        MySqlCommand cmd = new MySqlCommand("DELETE FROM offices WHERE officeCode='" + officeCode.Text + "'", myConn);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Employee Deleted");
+                    }
+                }
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show("Error message is: " + e1.Message);
+            }
+
+        }
     }
     }
 
